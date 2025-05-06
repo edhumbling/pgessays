@@ -137,8 +137,14 @@ function displayFeaturedEssays(essays) {
         const essayNumber = essay['Article no.'] || '';
         // Find the corresponding essay file
         const slug = `${essayNumber}_${title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '_')}`;
-        // For display purposes, we'll use a simpler slug
-        const displaySlug = title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+        // For display purposes, we'll use a simpler slug that matches the create-essay-html.py logic
+        let displaySlug = title.toLowerCase();
+        // Replace all special characters with hyphens
+        displaySlug = displaySlug.replace(/[^a-z0-9]+/g, '-');
+        // Remove leading and trailing hyphens
+        displaySlug = displaySlug.replace(/^-+|-+$/g, '');
+        // Replace multiple hyphens with a single hyphen
+        displaySlug = displaySlug.replace(/-+/g, '-');
 
         return `
             <div class="bg-white rounded-lg shadow-md overflow-hidden">

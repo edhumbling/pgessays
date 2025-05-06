@@ -251,8 +251,15 @@ for filename in os.listdir(essays_dir):
         reading_time = estimate_reading_time(markdown_content)
 
         # Create the HTML file
-        # Create a display-friendly slug for the URL
-        display_slug = title.lower().replace(' ', '-').replace("'", '').replace('"', '').replace(':', '').replace(',', '').replace('.', '')
+        # Create a display-friendly slug for the URL - handle all special characters
+        display_slug = title.lower()
+        # Replace all special characters with hyphens
+        display_slug = re.sub(r'[^a-z0-9]+', '-', display_slug)
+        # Remove leading and trailing hyphens
+        display_slug = display_slug.strip('-')
+        # Replace multiple hyphens with a single hyphen
+        display_slug = re.sub(r'-+', '-', display_slug)
+
         output_filename = f"{display_slug}.html"
         output_path = os.path.join(output_dir, output_filename)
 
