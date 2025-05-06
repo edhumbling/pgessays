@@ -1,6 +1,7 @@
 [build]
   publish = "."
-  command = "python setup_project.py && python create-essay-html.py && python generate_pdf_epub.py"
+  command = "python setup_project.py && python create-essay-html.py && python generate_pdf_epub.py && python generate_sitemap.py"
+  functions = "netlify/functions"
 
 [build.environment]
   PYTHON_VERSION = "3.9"

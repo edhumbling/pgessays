@@ -23,7 +23,7 @@ def setup_project():
     dest_dir = '.'
 
     # Create necessary directories
-    directories = ['css', 'js', 'essays', 'downloads', 'downloads/pdf', 'downloads/epub', 'downloads/combined']
+    directories = ['css', 'js', 'essays', 'downloads', 'downloads/pdf', 'downloads/epub', 'downloads/combined', 'netlify/functions']
     for directory in directories:
         os.makedirs(os.path.join(dest_dir, directory), exist_ok=True)
 
@@ -37,9 +37,15 @@ def setup_project():
         ('css/styles.css', 'css/styles.css'),
         ('js/main.js', 'js/main.js'),
         ('create-essay-html.py', 'create-essay-html.py'),
+        ('generate_sitemap.py', 'generate_sitemap.py'),
+        ('index.js', 'index.js'),
+        ('package.json', 'package.json'),
+        ('robots.txt', 'robots.txt'),
+        ('sitemap.xml', 'sitemap.xml'),
         ('essays/essays.csv', 'essays/essays.csv'),
         ('_redirects', '_redirects'),
-        ('netlify.toml', 'netlify.toml')
+        ('netlify.toml', 'netlify.toml'),
+        ('netlify/functions/index.js', 'netlify/functions/index.js')
     ]
 
     for src, dst in files_to_copy:
