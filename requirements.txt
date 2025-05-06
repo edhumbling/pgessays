@@ -11,6 +11,7 @@ html2text==2025.4.15
 htmldate==1.9.3
 idna==3.10
 lxml==5.4.0
+pandas==2.0.0
 python-dateutil==2.9.0.post0
 pytz==2025.2
 pytz-deprecation-shim==0.1.0.post0
