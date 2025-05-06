@@ -124,8 +124,19 @@ function displayFeaturedEssays(essays) {
     const featuredEssaysElement = document.getElementById('featured-essays');
     if (!featuredEssaysElement) return;
 
-    // Get 3 featured essays (you can customize this selection)
-    const featuredEssays = essays.slice(0, 3);
+    // Sort essays by date (newest first)
+    const sortedEssays = [...essays].sort((a, b) => {
+        const dateA = new Date(a['Date'] || '1900-01-01');
+        const dateB = new Date(b['Date'] || '1900-01-01');
+        return dateB - dateA;
+    });
+
+    // Get 3 latest essays
+    const featuredEssays = sortedEssays.slice(0, 3);
+
+    // Check if any essays were added in the last 30 days
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     featuredEssaysElement.innerHTML = featuredEssays.map(essay => {
         const number = essay['Article no.'] || '';
@@ -146,18 +157,29 @@ function displayFeaturedEssays(essays) {
         // Replace multiple hyphens with a single hyphen
         displaySlug = displaySlug.replace(/-+/g, '-');
 
+        // Check if this is a new essay (added in the last 30 days)
+        const essayDate = new Date(date || '1900-01-01');
+        const isNew = essayDate > thirtyDaysAgo;
+
+        // New tag HTML
+        const newTag = isNew ?
+            `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>` : '';
+
         return `
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#${number}</span>
+                        <div class="flex items-center">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-100">#${number}</span>
+                            ${newTag}
+                        </div>
                         <span class="text-xs text-gray-500">${date}</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
                     <p class="text-gray-600 mb-4">Loading excerpt...</p>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
-                        <a href="/essays/${displaySlug}.html" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Read more →</a>
+                        <a href="/essays/${displaySlug}.html" class="text-orange-600 hover:text-orange-800 font-medium text-sm">Read more →</a>
                     </div>
                 </div>
             </div>
@@ -266,6 +288,73 @@ function performSearch(query) {
             </div>
         `;
     }
+}
+
+// Display all essays on the essays page
+function displayAllEssays(essays) {
+    const allEssaysElement = document.getElementById('all-essays');
+    if (!allEssaysElement) return;
+
+    // Sort essays by date (newest first)
+    const sortedEssays = [...essays].sort((a, b) => {
+        const dateA = new Date(a['Date'] || '1900-01-01');
+        const dateB = new Date(b['Date'] || '1900-01-01');
+        return dateB - dateA;
+    });
+
+    // Check if any essays were added in the last 30 days
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    allEssaysElement.innerHTML = sortedEssays.map(essay => {
+        const number = essay['Article no.'] || '';
+        const title = essay['Title'] || '';
+        const date = essay['Date'] || '';
+        const url = essay['URL'] || '';
+
+        // Create a slug from the title for the local URL
+        let displaySlug = title.toLowerCase();
+        // Replace all special characters with hyphens
+        displaySlug = displaySlug.replace(/[^a-z0-9]+/g, '-');
+        // Remove leading and trailing hyphens
+        displaySlug = displaySlug.replace(/^-+|-+$/g, '');
+        // Replace multiple hyphens with a single hyphen
+        displaySlug = displaySlug.replace(/-+/g, '-');
+
+        // Check if this is a new essay (added in the last 30 days)
+        const essayDate = new Date(date || '1900-01-01');
+        const isNew = essayDate > thirtyDaysAgo;
+
+        // New tag HTML
+        const newTag = isNew ?
+            `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>` : '';
+
+        return `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center">
+                            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-100">#${number}</span>
+                            ${newTag}
+                        </div>
+                        <span class="text-xs text-gray-500">${date}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
+                    <p class="text-gray-600 mb-4">Loading excerpt...</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-gray-500">Read time: ~10 min</span>
+                        <a href="/essays/${displaySlug}.html" class="text-orange-500 hover:text-orange-700 font-medium text-sm">Read more →</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    // Load excerpts for each essay
+    sortedEssays.forEach((essay, index) => {
+        const number = essay['Article no.'] || '';
+        loadEssayExcerpt(number, index);
+    });
 }
 
 // Handle routing for SPA-like behavior

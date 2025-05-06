@@ -34,7 +34,7 @@
                         <a href="index.html" class="text-gray-500 hover:text-gray-700">Home</a>
                     </div>
                     <div class="ml-6 flex space-x-8">
-                        <a href="essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="essays.html" class="border-orange-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Essays
                         </a>
                         <a href="download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
@@ -48,9 +48,9 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <div class="relative">
-                            <input type="text" id="search-input" placeholder="Search essays..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <input type="text" id="search-input" placeholder="Search essays..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <svg class="h-5 w-5 text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                 </svg>
                             </div>
@@ -64,11 +64,11 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <section class="mb-12">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">All Essays</h2>
-            
+
             <!-- Filters -->
             <div class="mb-8">
                 <div class="flex flex-wrap gap-2">
-                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-indigo-600 text-white">
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-500 text-white">
                         All
                     </button>
                     <button class="px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200">
@@ -85,7 +85,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Essays Grid -->
             <div id="all-essays" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Essays will be loaded here by JavaScript -->
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Pagination -->
             <div class="mt-8 flex justify-center">
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
@@ -178,7 +178,7 @@
                             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                    <a href="#" aria-current="page" class="z-10 bg-orange-50 border-orange-500 text-orange-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
                         1
                     </a>
                     <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
@@ -210,51 +210,12 @@
                 All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
             </p>
             <p class="text-center text-sm text-gray-500 mt-2">
-                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-orange-500 hover:text-orange-700">graham-essays</a> repository.
             </p>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
-    <script>
-        // Function to display all essays
-        function displayAllEssays(essays) {
-            const allEssaysElement = document.getElementById('all-essays');
-            if (!allEssaysElement) return;
-            
-            allEssaysElement.innerHTML = essays.map(essay => {
-                const number = essay['Article no.'] || '';
-                const title = essay['Title'] || '';
-                const date = essay['Date'] || '';
-                const url = essay['URL'] || '';
-                
-                // Create a slug from the title for the local URL
-                const slug = title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
-                
-                return `
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#${number}</span>
-                                <span class="text-xs text-gray-500">${date}</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
-                            <p class="text-gray-600 mb-4">Loading excerpt...</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-sm text-gray-500">Read time: ~10 min</span>
-                                <a href="essays/${slug}.html" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            // Load excerpts for each essay
-            essays.forEach((essay, index) => {
-                const number = essay['Article no.'] || '';
-                loadEssayExcerpt(number, index);
-            });
-        }
-    </script>
+    <!-- No inline script needed, all functionality is in main.js -->
 </body>
 </html>
