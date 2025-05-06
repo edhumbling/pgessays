@@ -73,11 +73,20 @@ This website is built on top of the [graham-essays](https://github.com/ofou/grah
 
 This website is configured for deployment on Netlify. The `netlify.toml` file contains the configuration for the build process.
 
-To deploy to Netlify:
+### Deploying to the existing site (paulgramessays.netlify.app)
+
+This repository is already connected to the Netlify site at [paulgramessays.netlify.app](https://paulgramessays.netlify.app). When you push changes to the main branch, Netlify will automatically build and deploy the site.
+
+### Deploying to a new Netlify site
+
+If you want to deploy to your own Netlify site:
 
 1. Fork this repository
 2. Connect your GitHub repository to Netlify
-3. Netlify will automatically build and deploy the site
+3. Configure the build settings:
+   - Build command: `python setup_project.py && python create-essay-html.py && python generate_pdf_epub.py`
+   - Publish directory: `.`
+4. Click "Deploy site"
 
 ## Project Structure
 

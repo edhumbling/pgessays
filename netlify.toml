@@ -5,6 +5,9 @@
 [build.environment]
   PYTHON_VERSION = "3.9"
 
+[site]
+  name = "paulgramessays"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
