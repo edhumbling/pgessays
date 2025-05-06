@@ -2,6 +2,7 @@
   publish = "."
   command = "python setup_project.py && python create-essay-html.py && python generate_pdf_epub.py && python generate_sitemap.py"
   functions = "netlify/functions"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF .github/"
 
 [build.environment]
   PYTHON_VERSION = "3.9"

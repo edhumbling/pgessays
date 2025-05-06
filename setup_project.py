@@ -38,6 +38,7 @@ def setup_project():
         ('js/main.js', 'js/main.js'),
         ('create-essay-html.py', 'create-essay-html.py'),
         ('generate_sitemap.py', 'generate_sitemap.py'),
+        ('scrape_new_essays.py', 'scrape_new_essays.py'),
         ('index.js', 'index.js'),
         ('package.json', 'package.json'),
         ('robots.txt', 'robots.txt'),
@@ -45,7 +46,8 @@ def setup_project():
         ('essays/essays.csv', 'essays/essays.csv'),
         ('_redirects', '_redirects'),
         ('netlify.toml', 'netlify.toml'),
-        ('netlify/functions/index.js', 'netlify/functions/index.js')
+        ('netlify/functions/index.js', 'netlify/functions/index.js'),
+        ('.github/workflows/scrape_essays.yml', '.github/workflows/scrape_essays.yml')
     ]
 
     for src, dst in files_to_copy:
