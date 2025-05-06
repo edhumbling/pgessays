@@ -77,16 +77,16 @@ html_template = '''<!DOCTYPE html>
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                        <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
                     </div>
                     <div class="ml-6 flex space-x-8">
-                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Essays
                         </a>
-                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Download
                         </a>
-                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             About
                         </a>
                     </div>
@@ -128,7 +128,7 @@ html_template = '''<!DOCTYPE html>
                         </svg>
                         Download Essay
                     </a>
-                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    <a href="/essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                         Browse More Essays
                     </a>
                 </div>
@@ -260,7 +260,7 @@ for filename in os.listdir(essays_dir):
             reading_time=reading_time,
             original_url=original_url,
             content=html_content,
-            download_url=filename,
+            download_url=f"/essays/{filename}",
             slug=essay_slug
         )
 

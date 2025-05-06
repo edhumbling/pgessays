@@ -6,7 +6,7 @@ def copy_directory(src, dst):
     """Copy a directory recursively."""
     if not os.path.exists(dst):
         os.makedirs(dst)
-    
+
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
@@ -21,28 +21,31 @@ def setup_project():
     # Define source and destination directories
     source_dir = '../pg-essays-website'
     dest_dir = '.'
-    
+
     # Create necessary directories
     directories = ['css', 'js', 'essays', 'downloads', 'downloads/pdf', 'downloads/epub', 'downloads/combined']
     for directory in directories:
         os.makedirs(os.path.join(dest_dir, directory), exist_ok=True)
-    
+
     # Copy files from the existing project
     files_to_copy = [
         ('index.html', 'index.html'),
         ('essays.html', 'essays.html'),
         ('download.html', 'download.html'),
         ('about.html', 'about.html'),
+        ('404.html', '404.html'),
         ('css/styles.css', 'css/styles.css'),
         ('js/main.js', 'js/main.js'),
         ('create-essay-html.py', 'create-essay-html.py'),
-        ('essays/essays.csv', 'essays/essays.csv')
+        ('essays/essays.csv', 'essays/essays.csv'),
+        ('_redirects', '_redirects'),
+        ('netlify.toml', 'netlify.toml')
     ]
-    
+
     for src, dst in files_to_copy:
         src_path = os.path.join(source_dir, src)
         dst_path = os.path.join(dest_dir, dst)
-        
+
         if os.path.exists(src_path):
             # Ensure the directory exists
             os.makedirs(os.path.dirname(dst_path), exist_ok=True)
@@ -51,11 +54,11 @@ def setup_project():
             print(f"Copied {src} to {dst}")
         else:
             print(f"Warning: {src_path} does not exist")
-    
+
     # Copy all essay markdown files
     essays_src = os.path.join(source_dir, 'essays')
     essays_dst = os.path.join(dest_dir, 'essays')
-    
+
     if os.path.exists(essays_src):
         for file in os.listdir(essays_src):
             if file.endswith('.md') and file != 'essays.csv':
@@ -65,23 +68,23 @@ def setup_project():
                 print(f"Copied essay {file}")
     else:
         print(f"Warning: {essays_src} does not exist")
-    
+
     # Create a modified download.html that includes links to PDF and EPUB files
     update_download_page()
-    
+
     print("Project setup complete!")
 
 def update_download_page():
     """Update the download page to include links to PDF and EPUB files."""
     download_html_path = 'download.html'
-    
+
     if not os.path.exists(download_html_path):
         print(f"Warning: {download_html_path} does not exist")
         return
-    
+
     with open(download_html_path, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     # Find the section to modify
     download_section = '''<div class="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
                             <div class="px-4 py-5 sm:p-6 text-center">
@@ -95,7 +98,7 @@ def update_download_page():
                                 </a>
                             </div>
                         </div>'''
-    
+
     # Create the new download section with local files
     new_download_section = '''<div class="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
                             <div class="px-4 py-5 sm:p-6 text-center">
@@ -109,10 +112,10 @@ def update_download_page():
                                 </a>
                             </div>
                         </div>'''
-    
+
     # Replace the section
     updated_content = content.replace(download_section, new_download_section)
-    
+
     # Update the PDF section
     pdf_section = '''<div class="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
                             <div class="px-4 py-5 sm:p-6 text-center">
@@ -126,7 +129,7 @@ def update_download_page():
                                 </a>
                             </div>
                         </div>'''
-    
+
     new_pdf_section = '''<div class="bg-white overflow-hidden shadow rounded-lg border border-gray-200">
                             <div class="px-4 py-5 sm:p-6 text-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -139,13 +142,13 @@ def update_download_page():
                                 </a>
                             </div>
                         </div>'''
-    
+
     updated_content = updated_content.replace(pdf_section, new_pdf_section)
-    
+
     # Write the updated content back to the file
     with open(download_html_path, 'w', encoding='utf-8') as f:
         f.write(updated_content)
-    
+
     print("Updated download.html with local file links")
 
 if __name__ == "__main__":

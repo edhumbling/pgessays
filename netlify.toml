@@ -8,12 +8,23 @@
 [site]
   name = "paulgramessays"
 
+# Redirect all routes to the index.html file (SPA style)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
-  conditions = {Language = ["en"], Country = ["US"]}
+
+# Specific redirects for essay pages
+[[redirects]]
+  from = "/essays/*"
+  to = "/essays/:splat"
+  status = 200
+
+# Redirect for download pages
+[[redirects]]
+  from = "/downloads/*"
+  to = "/downloads/:splat"
+  status = 200
 
 [dev]
   command = "python -m http.server"

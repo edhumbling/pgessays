@@ -1,0 +1,8 @@
+# Redirect all routes to the index.html file (SPA style)
+/*    /index.html   200
+
+# Specific redirects for essay pages
+/essays/*    /essays/:splat    200
+
+# Redirect for download pages
+/downloads/*    /downloads/:splat    200
