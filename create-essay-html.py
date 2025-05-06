@@ -240,16 +240,20 @@ for filename in os.listdir(essays_dir):
 
         # Convert markdown to HTML
         try:
-            html_content = markdown.markdown(markdown_content, extensions=['extra'])
+            # Clean up the markdown content to remove any HTML tags that might be causing issues
+            cleaned_markdown = markdown_content.replace('<!DOCTYPE html>', '').replace('<html', '&lt;html').replace('</html>', '&lt;/html&gt;')
+            html_content = markdown.markdown(cleaned_markdown, extensions=['extra'])
         except Exception as e:
             print(f"Error converting {filename} to HTML: {e}")
-            html_content = f"<p>{markdown_content}</p>"
+            html_content = f"<p>{markdown_content.replace('<', '&lt;').replace('>', '&gt;')}</p>"
 
         # Estimate reading time
         reading_time = estimate_reading_time(markdown_content)
 
         # Create the HTML file
-        output_filename = f"{essay_slug}.html"
+        # Create a display-friendly slug for the URL
+        display_slug = title.lower().replace(' ', '-').replace("'", '').replace('"', '').replace(':', '').replace(',', '').replace('.', '')
+        output_filename = f"{display_slug}.html"
         output_path = os.path.join(output_dir, output_filename)
 
         # Fill in the template

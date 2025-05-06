@@ -133,8 +133,12 @@ function displayFeaturedEssays(essays) {
         const date = essay['Date'] || '';
         const url = essay['URL'] || '';
 
-        // Create a slug from the title for the local URL
-        const slug = title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
+        // Use the essay number to create a more reliable slug
+        const essayNumber = essay['Article no.'] || '';
+        // Find the corresponding essay file
+        const slug = `${essayNumber}_${title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '_')}`;
+        // For display purposes, we'll use a simpler slug
+        const displaySlug = title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
 
         return `
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -147,7 +151,7 @@ function displayFeaturedEssays(essays) {
                     <p class="text-gray-600 mb-4">Loading excerpt...</p>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
-                        <a href="/essays/${slug}.html" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Read more →</a>
+                        <a href="/essays/${displaySlug}.html" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Read more →</a>
                     </div>
                 </div>
             </div>
@@ -184,8 +188,10 @@ async function loadEssayExcerpt(essayNumber, index) {
 
 // Extract an excerpt from the markdown content
 function extractExcerpt(markdown, length = 150) {
-    // Remove markdown formatting
+    // Remove HTML tags first
     let text = markdown
+        .replace(/<\/?[^>]+(>|$)/g, '') // Remove HTML tags
+        .replace(/<!DOCTYPE.*?>/gi, '') // Remove DOCTYPE
         .replace(/^#.*$/gm, '') // Remove headings
         .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Replace links with just the text
         .replace(/[*_~`]/g, '') // Remove emphasis markers
