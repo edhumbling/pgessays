@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Can You Buy a Silicon Valley? Maybe. - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#107</span>
+                    <span class="text-sm text-gray-500">February 2009</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Can You Buy a Silicon Valley? Maybe.</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">10 min read</span>
+                    <a href="http://www.paulgraham.com/maybe.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>107 Can You Buy a Silicon Valley?  Maybe.</h1>
+<p>February 2009   </p>
+<p>A lot of cities look at Silicon Valley and ask "How could we make something like that happen here?" The <a href="siliconvalley.html">organic</a> way to do it is to establish a first-rate university in a place where rich people want to live. That's how Silicon Valley happened. But could you shortcut the process by funding startups?   </p>
+<p>Possibly. Let's consider what it would take.   </p>
+<p>The first thing to understand is that encouraging startups is a different problem from encouraging startups in a particular city. The latter is much more expensive.   </p>
+<p>People sometimes think they could improve the startup scene in their town by starting something like <a href="http://ycombinator.com">Y Combinator</a> there, but in fact it will have near zero effect. I know because Y Combinator itself had near zero effect on Boston when we were based there half the year. The people we funded came from all over the country (indeed, the world) and afterward they went wherever they could get more funding--which generally meant Silicon Valley.   </p>
+<p>The seed funding business is not a regional business, because at that stage startups are mobile. They're just a couple founders with laptops. <a href="#can_you_buy_a_silicon_valley__maybe_note1">1</a>   </p>
+<p>If you want to encourage startups in a particular city, you have to fund startups that won't leave. There are two ways to do that: have rules preventing them from leaving, or fund them at the point in their life when they naturally take root. The first approach is a mistake, because it becomes a filter for selecting bad startups. If your terms force startups to do things they don't want to, only the desperate ones will take your money.   </p>
+<p>Good startups will move to another city as a condition of funding. What they won't do is agree not to move the next time they need funding. So the only way to get them to stay is to give them enough that they never need to leave.   </p>
+<hr />
+<p>How much would that take? If you want to keep startups from leaving your town, you have to give them enough that they're not tempted by an offer from Silicon Valley VCs that requires them to move. A startup would be able to refuse such an offer if they had grown to the point where they were (a) rooted in your town and/or (b) so successful that VCs would fund them even if they didn't move.   </p>
+<p>How much would it cost to grow a startup to that point? A minimum of several hundred thousand dollars. <a href="http://wufoo.com">Wufoo</a> seem to have rooted themselves in Tampa on $118k, but they're an extreme case. On average it would take at least half a million.   </p>
+<p>So if it seems too good to be true to think you could grow a local silicon valley by giving startups $15-20k each like Y Combinator, that's because it is. To make them stick around you'd have to give them at least 20 times that much.   </p>
+<p>However, even that is an interesting prospect. Suppose to be on the safe side it would cost a million dollars per startup. If you could get startups to stick to your town for a million apiece, then for a billion dollars you could bring in a thousand startups. That probably wouldn't push you past Silicon Valley itself, but it might get you second place.   </p>
+<p>For the price of a football stadium, any town that was decent to live in could make itself one of the biggest startup hubs in the world.   </p>
+<p>What's more, it wouldn't take very long. You could probably do it in five years. During the term of one mayor. And it would get easier over time, because the more startups you had in town, the less it would take to get new ones to move there. By the time you had a thousand startups in town, the VCs wouldn't be trying so hard to get them to move to Silicon Valley; instead they'd be opening local offices. Then you'd really be in good shape. You'd have started a self-sustaining chain reaction like the one that drives the Valley.   </p>
+<hr />
+<p>But now comes the hard part. You have to pick the startups. How do you do that? Picking startups is a rare and valuable skill, and the handful of people who have it are not readily hireable. And this skill is so hard to measure that if a government did try to hire people with it, they'd almost certainly get the wrong ones.   </p>
+<p>For example, a city could give money to a VC fund to establish a local branch, and let them make the choices. But only a bad VC fund would take that deal. They wouldn't <em>seem</em> bad to the city officials. They'd seem very impressive. But they'd be bad at picking startups. That's the characteristic failure mode of VCs. All VCs look impressive to limited partners. The difference between the good ones and the bad ones only becomes visible in the other half of their jobs: choosing and advising startups. <a href="#can_you_buy_a_silicon_valley__maybe_note2">2</a>   </p>
+<p>What you really want is a pool of local angel investors--people investing money they made from their own startups. But unfortunately you run into a chicken and egg problem here. If your city isn't already a startup hub, there won't be people there who got rich from startups. And there is no way I can think of that a city could attract angels from outside. By definition they're rich. There's no incentive that would make them move. <a href="#can_you_buy_a_silicon_valley__maybe_note3">3</a>   </p>
+<p>However, a city could select startups by piggybacking on the expertise of investors who weren't local. It would be pretty straightforward to make a list of the most eminent Silicon Valley angels and from that to generate a list of all the startups they'd invested in. If a city offered these companies a million dollars each to move, a lot of the earlier stage ones would probably take it.   </p>
+<p>Preposterous as this plan sounds, it's probably the most efficient way a city could select good startups.   </p>
+<p>It would hurt the startups somewhat to be separated from their original investors. On the other hand, the extra million dollars would give them a lot more runway.   </p>
+<hr />
+<p>Would the transplanted startups survive? Quite possibly. The only way to find out would be to try it. It would be a pretty cheap experiment, as civil expenditures go. Pick 30 startups that eminent angels have recently invested in, give them each a million dollars if they'll relocate to your city, and see what happens after a year. If they seem to be thriving, you can try importing startups on a larger scale.   </p>
+<p>Don't be too legalistic about the conditions under which they're allowed to leave. Just have a gentlemen's agreement.   </p>
+<p>Don't try to do it on the cheap and pick only 10 for the initial experiment. If you do this on too small a scale you'll just guarantee failure. Startups need to be around other startups. 30 would be enough to feel like a community.   </p>
+<p>Don't try to make them all work in some renovated warehouse you've made into an "incubator." Real startups prefer to work in their own spaces.   </p>
+<p>In fact, don't impose any restrictions on the startups at all. Startup founders are mostly <a href="gba.html">hackers</a>, and hackers are much more constrained by gentlemen's agreements than regulations. If they shake your hand on a promise, they'll keep it. But show them a lock and their first thought is how to pick it.   </p>
+<p>Interestingly, the 30-startup experiment could be done by any sufficiently rich private citizen. And what pressure it would put on the city if it worked. 
+<a href="#can_you_buy_a_silicon_valley__maybe_note4">4</a>  </p>
+<hr />
+<p>Should the city take stock in return for the money? In principle they're entitled to, but how would they choose valuations for the startups? You couldn't just give them all the same valuation: that would be too low for some (who'd turn you down) and too high for others (because it might make their next round a "down round"). And since we're assuming we're doing this without being able to pick startups, we also have to assume we can't value them, since that's practically the same thing.   </p>
+<p>Another reason not to take stock in the startups is that startups are often involved in disreputable things. So are established companies, but they don't get blamed for it. If someone gets murdered by someone they met on Facebook, the press will treat the story as if it were about Facebook. If someone gets murdered by someone they met at a supermarket, the press will just treat it as a story about a murder. So understand that if you invest in startups, they might build things that get used for pornography, or file-sharing, or the expression of unfashionable opinions. You should probably sponsor this project jointly with your political opponents, so they can't use whatever the startups do as a club to beat you with.   </p>
+<p>It would be too much of a political liability just to give the startups the money, though. So the best plan would be to make it convertible debt, but which didn't convert except in a really big round, like $20 million.   </p>
+<hr />
+<p>How well this scheme worked would depend on the <a href="cities.html">city</a>. There are some towns, like Portland, that would be easy to turn into startup hubs, and others, like Detroit, where it would really be an uphill battle. So be honest with yourself about the sort of town you have before you try this.   </p>
+<p>It will be easier in proportion to how much your town resembles San Francisco. Do you have good weather? Do people live downtown, or have they abandoned the center for the suburbs? Would the city be described as "hip" and "tolerant," or as reflecting "traditional values?" Are there good universities nearby? Are there walkable neighborhoods? Would nerds feel at home? If you answered yes to all these questions, you might be able not only to pull off this scheme, but to do it for less than a million per startup.   </p>
+<p>I realize the chance of any city having the political will to carry out this plan is microscopically small. I just wanted to explore what it would take if one did. How hard would it be to jumpstart a silicon valley? It's fascinating to think this prize might be within the reach of so many cities. So even though they'll all still spend the money on the stadium, at least now someone can ask them: why did you choose to do that instead of becoming a serious rival to Silicon Valley?   </p>
+<p><strong>Notes</strong>   </p>
+<p><a name=can_you_buy_a_silicon_valley__maybe_note1>[1]</a> What people who start these supposedly local seed firms always find is that (a) their applicants come from all over, not just the local area, and (b) the local startups also apply to the other seed firms. So what ends up happening is that the applicant pool gets partitioned by quality rather than geography.   </p>
+<p><a name=can_you_buy_a_silicon_valley__maybe_note2>[2]</a> Interestingly, the bad VCs fail by choosing startups run by people like them--people who are good presenters, but have no real substance. It's a case of the fake leading the fake. And since everyone involved is so plausible, the LPs who invest in these funds have no idea what's happening till they measure their returns.   </p>
+<p><a name=can_you_buy_a_silicon_valley__maybe_note3>[3]</a> Not even being a tax haven, I suspect. That makes some rich people move, but not the type who would make good angel investors in startups.   </p>
+<p><a name=can_you_buy_a_silicon_valley__maybe_note4>[4]</a> Thanks to Michael Keenan for pointing this out.   </p>
+<p><strong>Thanks</strong> to Trevor Blackwell, Jessica Livingston, Robert Morris, and Fred Wilson for reading drafts of this.   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="107_can_you_buy_a_silicon_valley__maybe.md" download="can_you_buy_a_silicon_valley__maybe.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

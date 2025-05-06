@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnestness - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#197</span>
+                    <span class="text-sm text-gray-500">January 2021</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Earnestness</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">9 min read</span>
+                    <a href="http://www.paulgraham.com/earnest.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>197 Earnestness</h1>
+<p>December 2020   </p>
+<p>Jessica and I have certain words that have special significance when we're talking about startups. The highest compliment we can pay to founders is to describe them as "earnest." This is not by itself a guarantee of success. You could be earnest but incapable. But when founders are both formidable (another of our words) and earnest, they're as close to unstoppable as you get.   </p>
+<p>Earnestness sounds like a boring, even Victorian virtue. It seems a bit of an anachronism that people in Silicon Valley would care about it. Why does this matter so much?   </p>
+<p>When you call someone earnest, you're making a statement about their motives. It means both that they're doing something for the right reasons, and that they're trying as hard as they can. If we imagine motives as vectors, it means both the direction and the magnitude are right. Though these are of course related: when people are doing something for the right reasons, they try harder. <a href="#earnestness_note1">1</a>   </p>
+<p>The reason motives matter so much in Silicon Valley is that so many people there have the wrong ones. Starting a successful startup makes you rich and famous. So a lot of the people trying to start them are doing it for those reasons. Instead of what? Instead of interest in the problem for its own sake. That is the root of earnestness. <a href="#earnestness_note2">2</a>   </p>
+<p>It's also the hallmark of a nerd. Indeed, when people describe themselves as "x nerds," what they mean is that they're interested in x for its own sake, and not because it's cool to be interested in x, or because of what they can get from it. They're saying they care so much about x that they're willing to sacrifice seeming cool for its sake.   </p>
+<p>A <a href="genius.html"><em>genuine interest</em></a> in something is a very powerful motivator  for some people, the most powerful motivator of all. <a href="#earnestness_note3">3</a> Which is why it's what Jessica and I look for in founders. But as well as being a source of strength, it's also a source of vulnerability. Caring constrains you. The earnest can't easily reply in kind to mocking banter, or put on a cool facade of nihil admirari. They care too much. They are doomed to be the straight man. That's a real disadvantage in your <a href="nerds.html"><em>teenage years</em></a>, when mocking banter and nihil admirari often have the upper hand. But it becomes an advantage later.   </p>
+<p>It's a commonplace now that the kids who were nerds in high school become the cool kids' bosses later on. But people misunderstand why this happens. It's not just because the nerds are smarter, but also because they're more earnest. When the problems get harder than the fake ones you're given in high school, caring about them starts to matter.   </p>
+<p>Does it always matter? Do the earnest always win? Not always. It probably doesn't matter much in politics, or in crime, or in certain types of business that are similar to crime, like gambling, personal injury law, patent trolling, and so on. Nor does it matter in academic fields at the more 
+<a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C5&amp;q=hermeneutic+dialectics+hegemonic+phenomenology+intersectionality"><em>bogus</em></a>
+ end of the spectrum. And though I don't know enough to say for sure, it may not matter in some kinds of humor: it may be possible to be completely cynical and still be very funny. <a href="#earnestness_note4">4</a>   </p>
+<p>Looking at the list of fields I mentioned, there's an obvious pattern. Except possibly for humor, these are all types of work I'd avoid like the plague. So that could be a useful heuristic for deciding which fields to work in: how much does earnestness matter? Which can in turn presumably be inferred from the prevalence of nerds at the top.   </p>
+<p>Along with "nerd," another word that tends to be associated with earnestness is "naive." The earnest often seem naive. It's not just that they don't have the motives other people have. They often don't fully grasp that such motives exist. Or they may know intellectually that they do, but because they don't feel them, they forget about them. <a href="#earnestness_note5">5</a>   </p>
+<p>It works to be slightly naive not just about motives but also, believe it or not, about the problems you're working on. Naive optimism can compensate for the bit rot that <a href="ecw.html"><em>rapid change</em></a> causes in established beliefs. You plunge into some problem saying "How hard can it be?", and then after solving it you learn that it was till recently insoluble.   </p>
+<p>Naivete is an obstacle for anyone who wants to seem sophisticated, and this is one reason would-be intellectuals find it so difficult to understand Silicon Valley. It hasn't been safe for such people to use the word "earnest" outside scare quotes since Oscar Wilde wrote "The Importance of Being Earnest" in 1895. And yet when you zoom in on Silicon Valley, right into <a href="jessica.html"><em>Jessica Livingston's brain</em></a>, that's what her x-ray vision is seeking out in founders. Earnestness! Who'd have guessed? Reporters literally can't believe it when founders making piles of money say that they started their companies to make the world better. The situation seems made for mockery. How can these founders be so naive as not to realize how implausible they sound?   </p>
+<p>Though those asking this question don't realize it, that's not a rhetorical question.   </p>
+<p>A lot of founders are faking it, of course, particularly the smaller fry, and the soon to be smaller fry. But not all of them. There are a significant number of founders who really are interested in the problem they're solving mainly for its own sake.   </p>
+<p>Why shouldn't there be? We have no difficulty believing that people would be interested in history or math or even old bus tickets for their own sake. Why can't there be people interested in self-driving cars or social networks for their own sake? When you look at the question from this side, it seems obvious there would be. And isn't it likely that having a deep interest in something would be a source of great energy and resilience? It is in every other field.   </p>
+<p>The question really is why we have a blind spot about business. And the answer to that is obvious if you know enough history. For most of history, making large amounts of money has not been very intellectually interesting. In preindustrial times it was never far from robbery, and some areas of business still retain that character, except using lawyers instead of soldiers.   </p>
+<p>But there are other areas of business where the work is genuinely interesting. Henry Ford got to spend much of his time working on interesting technical problems, and for the last several decades the trend in that direction has been accelerating. It's much easier now to make a lot of money by working on something you're interested in than it was <a href="re.html"><em>50 years ago</em></a>. And that, rather than how fast they grow, may be the most important change that startups represent. Though indeed, the fact that the work is genuinely interesting is a big part of why it gets done so fast. <a href="#earnestness_note6">6</a>   </p>
+<p>Can you imagine a more important change than one in the relationship between intellectual curiosity and money? These are two of the most powerful forces in the world, and in my lifetime they've become significantly more aligned. How could you not be fascinated to watch something like this happening in real time?   </p>
+<p>I meant this essay to be about earnestness generally, and now I've gone and talked about startups again. But I suppose at least it serves as an example of an x nerd in the wild.   </p>
+<p><strong>Notes</strong>   </p>
+<p><a name=earnestness_note1>[1]</a> It's interesting how many different ways there are <em>not</em> to be earnest: to be cleverly cynical, to be superficially brilliant, to be conspicuously virtuous, to be cool, to be sophisticated, to be orthodox, to be a snob, to bully, to pander, to be on the make. This pattern suggests that earnestness is not one end of a continuum, but a target one can fall short of in multiple dimensions.   </p>
+<p>Another thing I notice about this list is that it sounds like a list of the ways people behave on Twitter. Whatever else social media is, it's a vivid catalogue of ways not to be earnest.   </p>
+<p><a name=earnestness_note2>[2]</a> People's motives are as mixed in Silicon Valley as anywhere else. Even the founders motivated mostly by money tend to be at least somewhat interested in the problem they're solving, and even the founders most interested in the problem they're solving also like the idea of getting rich. But there's great variation in the relative proportions of different founders' motivations.   </p>
+<p>And when I talk about "wrong" motives, I don't mean morally wrong. There's nothing morally wrong with starting a startup to make money. I just mean that those startups don't do as well.   </p>
+<p><a name=earnestness_note3>[3]</a> The most powerful motivator for most people is probably family. But there are some for whom intellectual curiosity comes first. In his (wonderful) autobiography, Paul Halmos says explicitly that for a mathematician, math must come before anything else, including family. Which at least implies that it did for him.   </p>
+<p><a name=earnestness_note4>[4]</a> Interestingly, just as the word "nerd" implies earnestness even when used as a metaphor, the word "politics" implies the opposite. It's not only in actual politics that earnestness seems to be a handicap, but also in office politics and academic politics.   </p>
+<p><a name=earnestness_note5>[5]</a> It's a bigger social error to seem naive in most European countries than it is in America, and this may be one of subtler reasons startups are less common there. Founder culture is completely at odds with sophisticated cynicism.   </p>
+<p>The most earnest part of Europe is Scandinavia, and not surprisingly this is also the region with the highest number of successful startups per capita.   </p>
+<p><a name=earnestness_note6>[6]</a> Much of business is schleps, and probably always will be. But even being a professor is largely schleps. It would be interesting to collect statistics about the schlep ratios of different jobs, but I suspect they'd rarely be less than 30%.   </p>
+<p><strong>Thanks</strong> to Trevor Blackwell, Patrick Collison, Suhail Doshi, Jessica Livingston, Mattias Ljungman, Harj Taggar, and Kyle Vogt for reading drafts of this.   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="197_earnestness.md" download="earnestness.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

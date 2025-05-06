@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject: Airbnb - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#137</span>
+                    <span class="text-sm text-gray-500">December 2010</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Subject: Airbnb</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">7 min read</span>
+                    <a href="http://www.paulgraham.com/airbnb.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>137 Subject: Airbnb</h1>
+<p>March 2011   </p>
+<p>Yesterday Fred Wilson published a remarkable <a href="http://avc.com/2011/03/airbnb">post</a> about missing <a href="http://airbnb.com">Airbnb</a>. VCs miss good startups all the time, but it's extraordinarily rare for one to talk about it publicly till long afterward. So that post is further evidence what a rare bird Fred is. He's probably the nicest VC I know.   </p>
+<p>Reading Fred's post made me go back and look at the emails I exchanged with him at the time, trying to convince him to invest in Airbnb. It was quite interesting to read. You can see Fred's mind at work as he circles the deal.   </p>
+<p>Fred and the Airbnb founders have generously agreed to let me publish this email exchange (with one sentence redacted about something that's strategically important to Airbnb and not an important part of the conversation). It's an interesting illustration of an element of the startup ecosystem that few except the participants ever see: investors trying to convince one another to invest in their portfolio companies. Hundreds if not thousands of conversations of this type are happening now, but if one has ever been published, I haven't seen it. The Airbnbs themselves never even saw these emails at the time.   </p>
+<p>We do a lot of this behind the scenes stuff at YC, because we invest in such a large number of companies, and we invest so early that investors sometimes need a lot of convincing to see their merits. I don't always try as hard as this though. Fred must have found me quite annoying.   </p>
+<hr />
+<p>[code] </p>
+<pre><code> from: Paul Graham     to: Fred Wilson, AirBedAndBreakfast Founders     date: Fri, Jan 23, 2009 at 11:42 AM     subject: meet the airbeds
+
+ One of the startups from the batch that just started, AirbedAndBreakfast,     is in NYC right now meeting their users.  (NYC is their biggest     market.) I'd recommend meeting them if your schedule allows.
+
+ I'd been thinking to myself that though these guys were going to     do really well, I should introduce them to angels, because VCs would     never go for it.  But then I thought maybe I should give you more     credit.  You'll certainly like meeting them.  Be sure to ask about     how they funded themselves with breakfast cereal.
+
+ There's no reason this couldn't be as big as Ebay.  And this team     is the right one to do it.
+
+
+--pg
+
+
+
+
+
+
+ from: Brian Chesky     to: Paul Graham     cc: Nathan Blecharczyk, Joe Gebbia     date: Fri, Jan 23, 2009 at 11:40 AM     subject: Re: meet the airbeds
+
+
+PG,
+
+
+ Thanks for the intro!
+
+ Brian
+
+
+
+
+
+ from: Paul Graham     to: Brian Chesky     cc: Nathan Blecharczyk, Joe Gebbia     date: Fri, Jan 23, 2009 at 12:38 PM     subject: Re: meet the airbeds
+
+ It's a longshot, at this stage, but if there was any VC who'd get     you guys, it would be Fred.  He is the least suburban-golf-playing     VC I know.
+
+ He likes to observe startups for a while before acting, so don't     be bummed if he seems ambivalent.
+
+
+--pg
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham,     date: Sun, Jan 25, 2009 at 5:28 PM     subject: Re: meet the airbeds
+
+ Thanks Paul
+
+ We are having a bit of a debate inside our partnership about the     airbed concept. We'll finish that debate tomorrow in our weekly     meeting and get back to you with our thoughts
+
+ Thanks
+
+
+Fred
+
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Sun, Jan 25, 2009 at 10:48 PM     subject: Re: meet the airbeds
+
+ I'd recommend having the debate after meeting them instead of before.     We had big doubts about this idea, but they vanished on meeting the     guys.
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Mon, Jan 26, 2009 at 11:08 AM     subject: RE: meet the airbeds
+
+ We are still very suspect of this idea but will take a meeting as     you suggest
+
+ Thanks
+
+
+fred
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham, AirBedAndBreakfast Founders     date: Mon, Jan 26, 2009 at 11:09 AM     subject: RE: meet the airbeds
+
+ Airbed team -
+
+ Are you still in NYC?
+
+ We'd like to meet if you are
+
+ Thanks
+
+
+fred
+
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Mon, Jan 26, 2009 at 1:42 PM     subject: Re: meet the airbeds
+
+ Ideas can morph.  Practically every really big startup could say,     five years later, "believe it or not, we started out doing ___."     It just seemed a very good sign to me that these guys were actually     on the ground in NYC hunting down (and understanding) their users.     On top of several previous good signs.
+
+
+--pg
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Sun, Feb 1, 2009 at 7:15 AM     subject: Re: meet the airbeds
+
+ It's interesting
+
+ Our two junior team members were enthusiastic
+
+ The three "old guys" didn't get it
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Mon, Feb 9, 2009 at 5:58 PM     subject: airbnb
+
+ The Airbeds just won the first poll among all the YC startups in     their batch by a landslide.  In the past this has not been a 100%     indicator of success (if only anything were) but much better than     random.
+
+
+--pg
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Fri, Feb 13, 2009 at 5:29 PM     subject: Re: airbnb
+
+ I met them today
+
+ They have an interesting business
+
+ I'm just not sure how big it's going to be
+
+
+fred
+
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Sat, Feb 14, 2009 at 9:50 AM     subject: Re: airbnb
+
+ Did they explain the long-term goal of being the market in accommodation     the way eBay is in stuff?  That seems like it would be huge.  Hotels     now are like airlines in the 1970s before they figured out how to     increase their load factors.
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Tue, Feb 17, 2009 at 2:05 PM     subject: Re: airbnb
+
+ They did but I am not sure I buy that
+
+ ABNB reminds me of Etsy in that it facilitates real commerce in a     marketplace model directly between two people
+
+ So I think it can scale all the way to the bed and breakfast market
+
+ But I am not sure they can take on the hotel market
+
+ I could be wrong
+
+ But even so, if you include short term room rental, second home     rental, bed and breakfast, and other similar classes of accommodations,     you get to a pretty big opportunity
+
+
+fred
+
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Wed, Feb 18, 2009 at 12:21 AM     subject: Re: airbnb
+
+ So invest in them!  They're very capital efficient.  They would     make an investor's money go a long way.
+
+ It's also counter-cyclical.  They just arrived back from NYC, and     when I asked them what was the most significant thing they'd observed,     it was how many of their users actually needed to do these rentals     to pay their rents.
+
+
+--pg
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Wed, Feb 18, 2009 at 2:21 AM     subject: Re: airbnb
+
+ There's a lot to like
+
+ I've done a few things, like intro it to my friends at Foundry who     were investors in Service Metrics and understand this model
+
+ I am also talking to my friend Mark Pincus who had an idea like     this a few years ago.
+
+ So we are working on it
+
+ Thanks for the lead
+
+
+Fred
+
+
+
+
+
+
+ from: Paul Graham     to: Fred Wilson     date: Fri, Feb 20, 2009 at 10:00 PM     subject: airbnb already spreading to pros
+
+ I know you're skeptical they'll ever get hotels, but there's a     continuum between private sofas and hotel rooms, and they just moved     one step further along it.
+
+ [link to an airbnb user]
+
+ This is after only a few months.  I bet you they will get hotels     eventually.  It will start with small ones.  Just wait till all the     10-room pensiones in Rome discover this site.  And once it spreads     to hotels, where is the point (in size of chain) at which it stops?     Once something becomes a big marketplace, you ignore it at your     peril.
+
+
+--pg
+
+
+
+
+
+
+ from: Fred Wilson     to: Paul Graham     date: Sat, Feb 21, 2009 at 4:26 AM     subject: Re: airbnb already spreading to pros
+
+ That's true. It's also true that there are quite a few marketplaces     out there that serve this same market
+
+ If you look at many of the people who list at ABNB, they list     elsewhere too
+
+ I am not negative on this one, I am interested, but we are still     in the gathering data phase.
+
+
+fred
+</code></pre>
+<p>[/code] </p>
+<p>`  </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="137_subject_airbnb.md" download="subject_airbnb.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

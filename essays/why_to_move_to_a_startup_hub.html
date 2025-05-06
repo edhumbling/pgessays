@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why to Move to a Startup Hub - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#085</span>
+                    <span class="text-sm text-gray-500">October 2007</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Why to Move to a Startup Hub</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">8 min read</span>
+                    <a href="http://www.paulgraham.com/startuphubs.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>085 Why to Move to a Startup Hub</h1>
+<p><a href="https://s.turbifycdn.com/aah/paulgraham/why-to-move-to-a-startup- hub-11.gif"></a>   </p>
+<p>October 2007   </p>
+<p>After the last <a href="webstartups.html">talk</a> I gave, one of the organizers got up on the stage to deliver an impromptu rebuttal. That never happened before. I only heard the first few sentences, but that was enough to tell what I said that upset him: that startups would do better if they moved to Silicon Valley.   </p>
+<p>This conference was in London, and most of the audience seemed to be from the UK. So saying startups should move to Silicon Valley seemed like a nationalistic remark: an obnoxious American telling them that if they wanted to do things right they should all just move to America.   </p>
+<p>Actually I'm less American than I seem. I didn't say so, but I'm British by birth. And just as Jews are ex officio allowed to tell Jewish jokes, I don't feel like I have to bother being diplomatic with a British audience.   </p>
+<p>The idea that startups would do better to move to Silicon Valley is not even a nationalistic one. <a href="#why_to_move_to_a_startup_hub_note1">1</a> It's the same thing I say to startups in the US. Y Combinator alternates between coasts every 6 months. Every other funding cycle is in Boston. And even though Boston is the second biggest startup hub in the US (and the world), we tell the startups from those cycles that their best bet is to move to Silicon Valley. If that's true of Boston, it's even more true of every other city.   </p>
+<p>This is about cities, not countries.   </p>
+<p>And I think I can prove I'm right. You can easily reduce the opposing argument ad what most people would agree was absurdum. Few would be willing to claim that it doesn't matter at all where a startup is--that a startup operating out of a small agricultural town wouldn't benefit from moving to a startup hub. Most people could see how it might be helpful to be in a place where there was infrastructure for startups, accumulated knowledge about how to make them work, and other people trying to do it. And yet whatever argument you use to prove that startups don't need to move from London to Silicon Valley could equally well be used to prove startups don't need to move from smaller towns to London.   </p>
+<p>The difference between cities is a matter of degree. And if, as nearly everyone who knows agrees, startups are better off in Silicon Valley than Boston, then they're better off in Silicon Valley than everywhere else too.   </p>
+<p>I realize I might seem to have a vested interest in this conclusion, because startups that move to the US might do it through Y Combinator. But the American startups we've funded will attest that I say the same thing to them.   </p>
+<p>I'm not claiming of course that every startup has to go to Silicon Valley to succeed. Just that all other things being equal, the more of a startup hub a place is, the better startups will do there. But other considerations can outweigh the advantages of moving. I'm not saying founders with families should uproot them to move halfway around the world; that might be too much of a distraction.   </p>
+<p>Immigration difficulties might be another reason to stay put. Dealing with immigration problems is like raising money: for some reason it seems to consume all your attention. A startup can't afford much of that. One Canadian startup we funded spent about 6 months working on moving to the US. Eventually they just gave up, because they couldn't afford to take so much time away from working on their software.   </p>
+<p>(If another country wanted to establish a rival to Silicon Valley, the single best thing they could do might be to create a special visa for startup founders. US immigration policy is one of Silicon Valley's biggest weaknesses.)   </p>
+<p>If your startup is connected to a specific industry, you may be better off in one of its centers. A startup doing something related to entertainment might want to be in New York or LA.   </p>
+<p>And finally, if a good investor has committed to fund you if you stay where you are, you should probably stay. Finding investors is hard. You generally shouldn't pass up a definite funding offer to move. <a href="#why_to_move_to_a_startup_hub_note2">2</a>   </p>
+<p>In fact, the quality of the investors may be the main advantage of startup hubs. Silicon Valley investors are noticeably more aggressive than Boston ones. Over and over, I've seen startups we've funded snatched by west coast investors out from under the noses of Boston investors who saw them first but acted too slowly. At this year's Boston Demo Day, I told the audience that this happened every year, so if they saw a startup they liked, they should make them an offer. And yet within a month it had happened again: an aggressive west coast VC who had met the founder of a YC-funded startup a week before beat out a Boston VC who had known him for years. By the time the Boston VC grasped what was happening, the deal was already gone.   </p>
+<p>Boston investors will admit they're more conservative. Some want to believe this comes from the city's prudent Yankee character. But Occam's razor suggests the truth is less flattering. Boston investors are probably more conservative than Silicon Valley investors for the same reason Chicago investors are more conservative than Boston ones. They don't understand startups as well.   </p>
+<p>West coast investors aren't bolder because they're irresponsible cowboys, or because the good weather makes them optimistic. They're bolder because they know what they're doing. They're the skiers who ski on the diamond slopes. Boldness is the essence of venture investing. The way you get big returns is not by trying to avoid losses, but by trying to ensure you get some of the big hits. And the big hits often look risky at first.   </p>
+<p>Like Facebook. Facebook was started in Boston. Boston VCs had the first shot at them. But they said no, so Facebook moved to Silicon Valley and raised money there. The partner who turned them down now says that "may turn out to have been a mistake."   </p>
+<p>Empirically, boldness wins. If the aggressive ways of west coast investors are going to come back to bite them, it has been a long time coming. Silicon Valley has been pulling ahead of Boston since the 1970s. If there was going to be a comeuppance for the west coast investors, the bursting of the Bubble would have been it. But since then the west coast has just pulled further ahead.   </p>
+<p>West coast investors are confident enough of their judgement to act boldly; east coast investors, not so much; but anyone who thinks east coast investors act that way out of prudence should see the frantic reactions of an east coast VC in the process of losing a deal to a west coast one.   </p>
+<p>In addition to the concentration that comes from specialization, startup hubs are also markets. And markets are usually centralized. Even now, when traders could be anywhere, they cluster in a few cities. It's hard to say exactly what it is about face to face contact that makes deals happen, but whatever it is, it hasn't yet been duplicated by technology.   </p>
+<p>Walk down University Ave at the right time, and you might overhear five different people talking on the phone about deals. In fact, this is part of the reason Y Combinator is in Boston half the time: it's hard to stand that year round. But though it can sometimes be annoying to be surrounded by people who only think about one thing, it's the place to be if that one thing is what you're trying to do.   </p>
+<p>I was talking recently to someone who works on search at Google. He knew a lot of people at Yahoo, so he was in a good position to compare the two companies. I asked him why Google was better at search. He said it wasn't anything specific Google did, but simply that they understood search so much better.   </p>
+<p>And that's why startups thrive in startup hubs like Silicon Valley. Startups are a very specialized business, as specialized as diamond cutting. And in startup hubs they understand it.   </p>
+<p><strong>Notes</strong>   </p>
+<p><a name=why_to_move_to_a_startup_hub_note1>[1]</a> The nationalistic idea is the converse: that startups should stay in a certain city because of the country it's in. If you really have a "one world" viewpoint, deciding to move from London to Silicon Valley is no different from deciding to move from Chicago to Silicon Valley.   </p>
+<p><a name=why_to_move_to_a_startup_hub_note2>[2]</a> An investor who merely seems like he will fund you, however, you can ignore. Seeming like they will fund you one day is the way investors say No.   </p>
+<p><strong>Thanks</strong> to Sam Altman, Jessica Livingston, Harjeet Taggar, and Kulveer Taggar for reading drafts of this.   </p>
+<p><a href="http://news.ycombinator.com/item?id=65815">Comment</a> on this essay.   </p>
+<p><a href="http://www.aoky.net/articles/paul_graham/startuphubs.htm">Japanese Translation</a>   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="085_why_to_move_to_a_startup_hub.md" download="why_to_move_to_a_startup_hub.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

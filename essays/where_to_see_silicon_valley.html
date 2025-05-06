@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to See Silicon Valley - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#132</span>
+                    <span class="text-sm text-gray-500">October 2010</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Where to See Silicon Valley</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">6 min read</span>
+                    <a href="http://www.paulgraham.com/seesv.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>132 Where to See Silicon Valley</h1>
+<p><strong>Want to start a startup?</strong> Get funded by <a href="http://ycombinator.com/apply.html">Y Combinator</a>.   </p>
+<p>October 2010   </p>
+<p>Silicon Valley proper is mostly suburban sprawl. At first glance it doesn't seem there's anything to see. It's not the sort of place that has conspicuous monuments. But if you look, there are subtle signs you're in a place that's different from other places.   </p>
+<p><strong>1.<a href="http://maps.google.com/maps?q=stanford+university">Stanford University</a></strong>   </p>
+<p>Stanford is a strange place. Structurally it is to an ordinary university what suburbia is to a city. It's enormously spread out, and feels surprisingly empty much of the time. But notice the weather. It's probably perfect. And notice the beautiful mountains to the west. And though you can't see it, cosmopolitan San Francisco is 40 minutes to the north. That combination is much of the reason Silicon Valley grew up around this university and not some other one.   </p>
+<p><strong>2.<a href="http://maps.google.com/maps?q=university+and+ramona+palo+alto">University Ave</a></strong>   </p>
+<p>A surprising amount of the work of the Valley is done in the cafes on or just off University Ave in Palo Alto. If you visit on a weekday between 10 and 5, you'll often see founders pitching investors. In case you can't tell, the founders are the ones leaning forward eagerly, and the investors are the ones sitting back with slightly pained expressions.   </p>
+<p><strong>3.<a href="http://maps.google.com/maps?q=165+university+ave+palo+alto">The Lucky Office</a></strong>   </p>
+<p>The office at 165 University Ave was Google's first. Then it was Paypal's. (Now it's <a href="http://wepay.com">Wepay</a>'s.) The interesting thing about it is the location. It's a smart move to put a startup in a place with restaurants and people walking around instead of in an office park, because then the people who work there want to stay there, instead of fleeing as soon as conventional working hours end. They go out for dinner together, talk about ideas, and then come back and implement them.   </p>
+<p>It's important to realize that Google's current location in an office park is not where they started; it's just where they were forced to move when they needed more space. Facebook was till recently across the street, till they too had to move because they needed more space.   </p>
+<p><strong>4.<a href="http://maps.google.com/maps?q=old+palo+alto">Old Palo Alto</a></strong>   </p>
+<p>Palo Alto was not originally a suburb. For the first 100 years or so of its existence, it was a college town out in the countryside. Then in the mid 1950s it was engulfed in a wave of suburbia that raced down the peninsula. But Palo Alto north of Oregon expressway still feels noticeably different from the area around it. It's one of the nicest places in the Valley. The buildings are old (though increasingly they are being torn down and replaced with generic McMansions) and the trees are tall. But houses are very expensive--around $1000 per square foot. This is post-exit Silicon Valley.   </p>
+<p><strong>5.<a href="http://maps.google.com/maps?q=2900+sand+hill+road+menlo+park">Sand Hill Road</a></strong>   </p>
+<p>It's interesting to see the VCs' offices on the north side of Sand Hill Road precisely because they're so boringly uniform. The buildings are all more or less the same, their exteriors express very little, and they are arranged in a confusing maze. (I've been visiting them for years and I still occasionally get lost.) It's not a coincidence. These buildings are a pretty accurate reflection of the VC business.   </p>
+<p>If you go on a weekday you may see groups of founders there to meet VCs. But mostly you won't see anyone; bustling is the last word you'd use to describe the atmos. Visiting Sand Hill Road reminds you that the opposite of "down and dirty" would be "up and clean."   </p>
+<p><strong>6.<a href="http://maps.google.com/maps?q=castro+and+villa+mountain+view">Castro Street</a></strong>   </p>
+<p>It's a tossup whether Castro Street or University Ave should be considered the heart of the Valley now. University Ave would have been 10 years ago. But Palo Alto is getting expensive. Increasingly startups are located in Mountain View, and Palo Alto is a place they come to meet investors. Palo Alto has a lot of different cafes, but there is one that clearly dominates in Mountain View: <a href="http://maps.google.com/places/us/ca/mountain-view/castro- st/201/-red-rock-coffee">Red Rock</a>.   </p>
+<p><strong>7.<a href="http://maps.google.com/maps?q=charleston+road+mountain+view">Google</a></strong>   </p>
+<p>Google spread out from its first building in Mountain View to a lot of the surrounding ones. But because the buildings were built at different times by different people, the place doesn't have the sterile, walled-off feel that a typical large company's headquarters have. It definitely has a flavor of its own though. You sense there is something afoot. The general atmos is vaguely utopian; there are lots of Priuses, and people who look like they drive them.   </p>
+<p>You can't get into Google unless you know someone there. It's very much worth seeing inside if you can, though. Ditto for Facebook, at the end of California Ave in Palo Alto, though there is nothing to see outside.   </p>
+<p><strong>8.<a href="http://maps.google.com/maps?q=skylonda">Skyline Drive</a></strong>   </p>
+<p>Skyline Drive runs along the crest of the Santa Cruz mountains. On one side is the Valley, and on the other is the sea--which because it's cold and foggy and has few harbors, plays surprisingly little role in the lives of people in the Valley, considering how close it is. Along some parts of Skyline the dominant trees are huge redwoods, and in others they're live oaks. Redwoods mean those are the parts where the fog off the coast comes in at night; redwoods condense rain out of fog. The MROSD manages a collection of <a href="http://www.openspace.org/">great walking trails</a> off Skyline.   </p>
+<p><strong>9.<a href="#where_to_see_silicon_valley_note280">280</a>(http://maps.google.com/maps?q=interstate+280+san+mateo)</strong>   </p>
+<p>Silicon Valley has two highways running the length of it: 101, which is pretty ugly, and 280, which is one of the more beautiful highways in the world. I always take 280 when I have a choice. Notice the long narrow lake to the west? That's the San Andreas Fault. It runs along the base of the hills, then heads uphill through Portola Valley. One of the MROSD trails runs <a href="http://www.openspace.org/preserves/pr_los_trancos.asp">right along the fault</a>. A string of rich neighborhoods runs along the foothills to the west of 280: Woodside, Portola Valley, Los Altos Hills, Saratoga, Los Gatos.   </p>
+<p><a href="http://www.flickr.com/photos/38037974@N00/3890299362/">SLAC</a> goes right under 280 a little bit south of Sand Hill Road. And a couple miles south of that is the Valley's equivalent of the "Welcome to Las Vegas" sign: <a href="http://www.flickr.com/photos/paulbarroga/3443486941/">The Dish</a>.   </p>
+<p><strong>Notes</strong>   </p>
+<p>I skipped the <a href="http://www.computerhistory.org/">Computer History Museum</a> because this is a list of where to see the Valley itself, not where to see artifacts from it. I also skipped San Jose. San Jose calls itself the capital of Silicon Valley, but when people in the Valley use the phrase "the city," they mean San Francisco. San Jose is a dotted line on a map.   </p>
+<p><strong>Thanks</strong> to Sam Altman, Paul Buchheit, Patrick Collison, and Jessica Livingston for reading drafts of this.   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="132_where_to_see_silicon_valley.md" download="where_to_see_silicon_valley.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

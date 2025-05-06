@@ -1,0 +1,18 @@
+[build]
+  publish = "."
+  command = "python setup_project.py && python create-essay-html.py && python generate_pdf_epub.py"
+
+[build.environment]
+  PYTHON_VERSION = "3.9"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Language = ["en"], Country = ["US"]}
+
+[dev]
+  command = "python -m http.server"
+  port = 8888
+  publish = "."

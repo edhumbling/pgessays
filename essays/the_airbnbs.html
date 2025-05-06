@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Airbnbs - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#195</span>
+                    <span class="text-sm text-gray-500">November 2020</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">The Airbnbs</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">6 min read</span>
+                    <a href="http://www.paulgraham.com/airbnbs.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>195 The Airbnbs</h1>
+<p>December 2020   </p>
+<p>To celebrate Airbnb's IPO and to help future founders, I thought it might be useful to explain what was special about Airbnb.   </p>
+<p>What was special about the Airbnbs was how earnest they were. They did nothing half-way, and we could sense this even in the interview. Sometimes after we interviewed a startup we'd be uncertain what to do, and have to talk it over. Other times we'd just look at one another and smile. The Airbnbs' interview was that kind. We didn't even like the idea that much. Nor did users, at that stage; they had no growth. But the founders seemed so full of energy that it was impossible not to like them.   </p>
+<p>That first impression was not misleading. During the batch our nickname for Brian Chesky was The Tasmanian Devil, because like the <a href="http://www.youtube.com/watch?v=StG2u5qfFRg&amp;t=2m27s">cartoon character</a> he seemed a tornado of energy. All three of them were like that. No one ever worked harder during YC than the Airbnbs did. When you talked to the Airbnbs, they took notes. If you suggested an idea to them in office hours, the next time you talked to them they'd not only have implemented it, but also implemented two new ideas they had in the process. "They probably have the best attitude of any startup we've funded" I wrote to Mike Arrington during the batch.   </p>
+<p>They're still like that. Jessica and I had dinner with Brian in the summer of 2018, just the three of us. By this point the company is ten years old. He took a page of notes about ideas for new things Airbnb could do.   </p>
+<p>What we didn't realize when we first met Brian and Joe and Nate was that Airbnb was on its last legs. After working on the company for a year and getting no growth, they'd agreed to give it one last shot. They'd try this Y Combinator thing, and if the company still didn't take off, they'd give up.   </p>
+<p>Any normal person would have given up already. They'd been funding the company with credit cards. They had a <em>binder</em> full of credit cards they'd maxed out. Investors didn't think much of the idea. One investor they met in a cafe walked out in the middle of meeting with them. They thought he was going to the bathroom, but he never came back. "He didn't even finish his smoothie," Brian said. And now, in late 2008, it was the worst recession in decades. The stock market was in free fall and wouldn't hit bottom for another four months.   </p>
+<p>Why hadn't they given up? This is a useful question to ask. People, like matter, reveal their nature under extreme conditions. One thing that's clear is that they weren't doing this just for the money. As a money-making scheme, this was pretty lousy: a year's work and all they had to show for it was a binder full of maxed-out credit cards. So why were they still working on this startup? Because of the experience they'd had as the first hosts.   </p>
+<p>When they first tried renting out airbeds on their floor during a design convention, all they were hoping for was to make enough money to pay their rent that month. But something surprising happened: they enjoyed having those first three guests staying with them. And the guests enjoyed it too. Both they and the guests had done it because they were in a sense forced to, and yet they'd all had a great experience. Clearly there was something new here: for hosts, a new way to make money that had literally been right under their noses, and for guests, a new way to travel that was in many ways better than hotels.   </p>
+<p>That experience was why the Airbnbs didn't give up. They knew they'd discovered something. They'd seen a glimpse of the future, and they couldn't let it go.   </p>
+<p>They knew that once people tried staying in what is now called "an airbnb," they would also realize that this was the future. But only if they tried it, and they weren't. That was the problem during Y Combinator: to get growth started.   </p>
+<p>Airbnb's goal during YC was to reach what we call <a href="http://paulgraham.com/ramenprofitable.html">ramen profitability</a>, which means making enough money that the company can pay the founders' living expenses, if they live on ramen noodles. Ramen profitability is not, obviously, the end goal of any startup, but it's the most important threshold on the way, because this is the point where you're airborne. This is the point where you no longer need investors' permission to continue existing. For the Airbnbs, ramen profitability was $4000 a month: $3500 for rent, and $500 for food. They taped this goal to the mirror in the bathroom of their apartment.   </p>
+<p>The way to get growth started in something like Airbnb is to focus on the hottest subset of the market. If you can get growth started there, it will spread to the rest. When I asked the Airbnbs where there was most demand, they knew from searches: New York City. So they focused on New York. They went there <a href="http://paulgraham.com/ds.html">in person</a> to visit their hosts and help them make their listings more attractive. A big part of that was better pictures. So Joe and Brian rented a professional camera and took pictures of the hosts' places themselves.   </p>
+<p>This didn't just make the listings better. It also taught them about their hosts. When they came back from their first trip to New York, I asked what they'd noticed about hosts that surprised them, and they said the biggest surprise was how many of the hosts were in the same position they'd been in: they needed this money to pay their rent. This was, remember, the worst recession in decades, and it had hit New York first. It definitely added to the Airbnbs' sense of mission to feel that people needed them.   </p>
+<p>In late January 2009, about three weeks into Y Combinator, their efforts started to show results, and their numbers crept upward. But it was hard to say for sure whether it was growth or just random fluctuation. By February it was clear that it was real growth. They made $460 in fees in the first week of February, $897 in the second, and $1428 in the third. That was it: they were airborne. Brian sent me an email on February 22 announcing that they were ramen profitable and giving the last three weeks' numbers.   </p>
+<p>"I assume you know what you've now set yourself up for next week," I responded.   </p>
+<p>Brian's reply was seven words: "We are not going to slow down."   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="195_the_airbnbs.md" download="the_airbnbs.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

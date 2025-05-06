@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crazy New Ideas - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode { background-color: #1a202c; color: #e2e8f0; }
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white { background-color: #2d3748; color: #e2e8f0; }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 { color: #f7fafc; }
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e0; }
+        .dark-mode .border-gray-200 { border-color: #4a5568; }
+        .dark-mode .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }
+
+        .essay-content { font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }
+        .essay-content h1, .essay-content h2, .essay-content h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }
+        .essay-content p { margin-bottom: 1.5rem; }
+        .essay-content a { color: #4f46e5; text-decoration: underline; }
+        .essay-content a:hover { color: #4338ca; }
+        .essay-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }
+        .dark-mode .essay-content blockquote { border-left-color: #4a5568; }
+
+        .font-size-controls button { padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }
+        .font-size-controls button.active { background-color: #4f46e5; color: white; }
+        .dark-mode .font-size-controls button.active { background-color: #6366f1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#204</span>
+                    <span class="text-sm text-gray-500">May 2021</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">Crazy New Ideas</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">7 min read</span>
+                    <a href="http://www.paulgraham.com/newideas.html" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                <h1>204 Crazy New Ideas</h1>
+<p>May 2021   </p>
+<p>There's one kind of opinion I'd be very afraid to express publicly. If someone I knew to be both a domain expert and a reasonable person proposed an idea that sounded preposterous, I'd be very reluctant to say "That will never work."   </p>
+<p>Anyone who has studied the history of ideas, and especially the history of science, knows that's how big things start. Someone proposes an idea that sounds crazy, most people dismiss it, then it gradually takes over the world.   </p>
+<p>Most implausible-sounding ideas are in fact bad and could be safely dismissed. But not when they're proposed by reasonable domain experts. If the person proposing the idea is reasonable, then they know how implausible it sounds. And yet they're proposing it anyway. That suggests they know something you don't. And if they have deep domain expertise, that's probably the source of it. <a href="#crazy_new_ideas_note1">1</a>   </p>
+<p>Such ideas are not merely unsafe to dismiss, but disproportionately likely to be interesting. When the average person proposes an implausible-sounding idea, its implausibility is evidence of their incompetence. But when a reasonable domain expert does it, the situation is reversed. There's something like an efficient market here: on average the ideas that seem craziest will, if correct, have the biggest effect. So if you can eliminate the theory that the person proposing an implausible-sounding idea is incompetent, its implausibility switches from evidence that it's boring to evidence that it's exciting. <a href="#crazy_new_ideas_note2">2</a>   </p>
+<p>Such ideas are not guaranteed to work. But they don't have to be. They just have to be sufficiently good bets -- to have sufficiently high expected value. And I think on average they do. I think if you bet on the entire set of implausible-sounding ideas proposed by reasonable domain experts, you'd end up net ahead.   </p>
+<p>The reason is that everyone is too conservative. The word "paradigm" is overused, but this is a case where it's warranted. Everyone is too much in the grip of the current paradigm. Even the people who have the new ideas undervalue them initially. Which means that before they reach the stage of proposing them publicly, they've already subjected them to an excessively strict filter. <a href="#crazy_new_ideas_note3">3</a>   </p>
+<p>The wise response to such an idea is not to make statements, but to ask questions, because there's a real mystery here. Why has this smart and reasonable person proposed an idea that seems so wrong? Are they mistaken, or are you? One of you has to be. If you're the one who's mistaken, that would be good to know, because it means there's a hole in your model of the world. But even if they're mistaken, it should be interesting to learn why. A trap that an expert falls into is one you have to worry about too.   </p>
+<p>This all seems pretty obvious. And yet there are clearly a lot of people who don't share my fear of dismissing new ideas. Why do they do it? Why risk looking like a jerk now and a fool later, instead of just reserving judgement?   </p>
+<p>One reason they do it is envy. If you propose a radical new idea and it succeeds, your reputation (and perhaps also your wealth) will increase proportionally. Some people would be envious if that happened, and this potential envy propagates back into a conviction that you must be wrong.   </p>
+<p>Another reason people dismiss new ideas is that it's an easy way to seem sophisticated. When a new idea first emerges, it usually seems pretty feeble. It's a mere hatchling. Received wisdom is a full-grown eagle by comparison. So it's easy to launch a devastating attack on a new idea, and anyone who does will seem clever to those who don't understand this asymmetry.   </p>
+<p>This phenomenon is exacerbated by the difference between how those working on new ideas and those attacking them are rewarded. The rewards for working on new ideas are weighted by the value of the outcome. So it's worth working on something that only has a 10% chance of succeeding if it would make things more than 10x better. Whereas the rewards for attacking new ideas are roughly constant; such attacks seem roughly equally clever regardless of the target.   </p>
+<p>People will also attack new ideas when they have a vested interest in the old ones. It's not surprising, for example, that some of Darwin's harshest critics were churchmen. People build whole careers on some ideas. When someone claims they're false or obsolete, they feel threatened.   </p>
+<p>The lowest form of dismissal is mere factionalism: to automatically dismiss any idea associated with the opposing faction. The lowest form of all is to dismiss an idea because of who proposed it.   </p>
+<p>But the main thing that leads reasonable people to dismiss new ideas is the same thing that holds people back from proposing them: the sheer pervasiveness of the current paradigm. It doesn't just affect the way we think; it is the Lego blocks we build thoughts out of. Popping out of the current paradigm is something only a few people can do. And even they usually have to suppress their intuitions at first, like a pilot flying through cloud who has to trust his instruments over his sense of balance. <a href="#crazy_new_ideas_note4">4</a>   </p>
+<p>Paradigms don't just define our present thinking. They also vacuum up the trail of crumbs that led to them, making our standards for new ideas impossibly high. The current paradigm seems so perfect to us, its offspring, that we imagine it must have been accepted completely as soon as it was discovered -- that whatever the church thought of the heliocentric model, astronomers must have been convinced as soon as Copernicus proposed it. Far, in fact, from it. Copernicus published the heliocentric model in 1532, but it wasn't till the mid seventeenth century that the balance of scientific opinion shifted in its favor. <a href="#crazy_new_ideas_note5">5</a>   </p>
+<p>Few understand how feeble new ideas look when they first appear. So if you want to have new ideas yourself, one of the most valuable things you can do is to learn what they look like when they're born. Read about how new ideas happened, and try to get yourself into the heads of people at the time. How did things look to them, when the new idea was only half-finished, and even the person who had it was only half-convinced it was right?   </p>
+<p>But you don't have to stop at history. You can observe big new ideas being born all around you right now. Just look for a reasonable domain expert proposing something that sounds wrong.   </p>
+<p>If you're nice, as well as wise, you won't merely resist attacking such people, but encourage them. Having new ideas is a lonely business. Only those who've tried it know how lonely. These people need your help. And if you help them, you'll probably learn something in the process.   </p>
+<p><strong>Notes</strong>   </p>
+<p><a name=crazy_new_ideas_note1>[1]</a> This domain expertise could be in another field. Indeed, such crossovers tend to be particularly promising.   </p>
+<p><a name=crazy_new_ideas_note2>[2]</a> I'm not claiming this principle extends much beyond math, engineering, and the hard sciences. In politics, for example, crazy-sounding ideas generally are as bad as they sound. Though arguably this is not an exception, because the people who propose them are not in fact domain experts; politicians are domain experts in political tactics, like how to get elected and how to get legislation passed, but not in the world that policy acts upon. Perhaps no one could be.   </p>
+<p><a name=crazy_new_ideas_note3>[3]</a> This sense of "paradigm" was defined by Thomas Kuhn in his <em>Structure of Scientific Revolutions</em> , but I also recommend his <em>Copernican Revolution</em> , where you can see him at work developing the idea.   </p>
+<p><a name=crazy_new_ideas_note4>[4]</a> This is one reason people with a touch of Asperger's may have an advantage in discovering new ideas. They're always flying on instruments.   </p>
+<p><a name=crazy_new_ideas_note5>[5]</a> Hall, Rupert. <em>From Galileo to Newton.</em> Collins, 1963. This book is particularly good at getting into contemporaries' heads.   </p>
+<p><strong>Thanks</strong> to Trevor Blackwell, Patrick Collison, Suhail Doshi, Daniel Gackle, Jessica Livingston, and Robert Morris for reading drafts of this.   </p>
+<hr />
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="204_crazy_new_ideas.md" download="crazy_new_ideas.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }
+
+            themeToggle.addEventListener('click', function() {
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            });
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    fontSizeButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                });
+            });
+        });
+
+        function updateThemeIcon(isDarkMode) {
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            } else {
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }
+        }
+    </script>
+</body>
+</html>

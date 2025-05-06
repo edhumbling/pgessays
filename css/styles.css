@@ -1,0 +1,145 @@
+/* Custom styles for Paul Graham Essays website */
+
+/* Dark mode */
+.dark-mode {
+    background-color: #1a202c;
+    color: #e2e8f0;
+}
+
+.dark-mode header,
+.dark-mode nav,
+.dark-mode .bg-white {
+    background-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+    color: #f7fafc;
+}
+
+.dark-mode p,
+.dark-mode .text-gray-600,
+.dark-mode .text-gray-500 {
+    color: #cbd5e0;
+}
+
+.dark-mode .border-gray-200 {
+    border-color: #4a5568;
+}
+
+.dark-mode .shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode input {
+    background-color: #4a5568;
+    border-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.dark-mode input::placeholder {
+    color: #a0aec0;
+}
+
+/* Essay content styles */
+.essay-content {
+    font-family: Georgia, serif;
+    line-height: 1.8;
+    font-size: 1.125rem;
+}
+
+.essay-content h1,
+.essay-content h2,
+.essay-content h3 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.essay-content p {
+    margin-bottom: 1.5rem;
+}
+
+.essay-content a {
+    color: #4f46e5;
+    text-decoration: underline;
+}
+
+.essay-content a:hover {
+    color: #4338ca;
+}
+
+.essay-content blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1rem;
+    font-style: italic;
+    margin: 1.5rem 0;
+}
+
+.dark-mode .essay-content blockquote {
+    border-left-color: #4a5568;
+}
+
+/* Font size controls */
+.font-size-controls button {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.font-size-controls button.active {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.dark-mode .font-size-controls button.active {
+    background-color: #6366f1;
+}
+
+/* Animation for loading */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .essay-content {
+        font-size: 1rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    header, nav, footer, .font-size-controls {
+        display: none;
+    }
+    
+    body, .essay-content {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+    
+    .essay-content a {
+        text-decoration: none;
+        color: #000;
+    }
+    
+    .essay-content a::after {
+        content: " (" attr(href) ")";
+        font-size: 90%;
+    }
+}

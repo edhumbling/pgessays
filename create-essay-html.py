@@ -1,0 +1,273 @@
+import os
+import re
+import csv
+import markdown
+
+# Define paths
+essays_dir = 'essays'
+output_dir = 'essays'
+
+# Create output directory if it doesn't exist
+os.makedirs(output_dir, exist_ok=True)
+
+# Read the CSV file to get essay metadata
+essays_metadata = {}
+csv_file = os.path.join(essays_dir, 'essays.csv')
+if os.path.exists(csv_file):
+    with open(csv_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            essay_number = row.get('Article no.', '')
+            essays_metadata[essay_number] = {
+                'title': row.get('Title', ''),
+                'date': row.get('Date', ''),
+                'url': row.get('URL', '')
+            }
+
+# HTML template for essay pages
+html_template = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .dark-mode {{ background-color: #1a202c; color: #e2e8f0; }}
+        .dark-mode header, .dark-mode nav, .dark-mode .bg-white {{ background-color: #2d3748; color: #e2e8f0; }}
+        .dark-mode h1, .dark-mode h2, .dark-mode h3 {{ color: #f7fafc; }}
+        .dark-mode p, .dark-mode .text-gray-600, .dark-mode .text-gray-500 {{ color: #cbd5e0; }}
+        .dark-mode .border-gray-200 {{ border-color: #4a5568; }}
+        .dark-mode .shadow {{ box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2); }}
+
+        .essay-content {{ font-family: Georgia, serif; line-height: 1.8; font-size: 1.125rem; }}
+        .essay-content h1, .essay-content h2, .essay-content h3 {{ font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin-top: 2rem; margin-bottom: 1rem; }}
+        .essay-content p {{ margin-bottom: 1.5rem; }}
+        .essay-content a {{ color: #4f46e5; text-decoration: underline; }}
+        .essay-content a:hover {{ color: #4338ca; }}
+        .essay-content blockquote {{ border-left: 4px solid #e5e7eb; padding-left: 1rem; font-style: italic; margin: 1.5rem 0; }}
+        .dark-mode .essay-content blockquote {{ border-left-color: #4a5568; }}
+
+        .font-size-controls button {{ padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin-right: 0.5rem; font-size: 0.875rem; }}
+        .font-size-controls button.active {{ background-color: #4f46e5; color: white; }}
+        .dark-mode .font-size-controls button.active {{ background-color: #6366f1; }}
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="../index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-6 flex space-x-8">
+                        <a href="../essays.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="../download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="../about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article>
+            <header class="mb-8">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">#{number}</span>
+                    <span class="text-sm text-gray-500">{date}</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">{title}</h1>
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-500">{reading_time} min read</span>
+                    <a href="{original_url}" target="_blank" rel="noopener noreferrer" class="text-sm text-indigo-600 hover:text-indigo-800">Original Source ↗</a>
+                </div>
+            </header>
+
+            <div class="font-size-controls mb-6 flex items-center">
+                <span class="text-sm text-gray-500 mr-2">Font size:</span>
+                <button class="text-sm" data-size="text-sm">Small</button>
+                <button class="text-base active" data-size="text-base">Medium</button>
+                <button class="text-lg" data-size="text-lg">Large</button>
+            </div>
+
+            <div class="essay-content text-base">
+                {content}
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                    <a href="{download_url}" download="{slug}.md" class="mb-4 sm:mb-0 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Essay
+                    </a>
+                    <a href="../essays.html" class="inline-flex items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Browse More Essays
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme and font size controls
+        document.addEventListener('DOMContentLoaded', function() {{
+            // Theme toggle
+            var themeToggle = document.getElementById('theme-toggle');
+            var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+            var currentTheme = localStorage.getItem('theme') ||
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+            if (currentTheme === 'dark') {{
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            }} else {{
+                document.body.classList.remove('dark-mode');
+                updateThemeIcon(false);
+            }}
+
+            themeToggle.addEventListener('click', function() {{
+                var isDarkMode = document.body.classList.toggle('dark-mode');
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                updateThemeIcon(isDarkMode);
+            }});
+
+            // Font size controls
+            var fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            var essayContent = document.querySelector('.essay-content');
+
+            fontSizeButtons.forEach(function(button) {{
+                button.addEventListener('click', function() {{
+                    fontSizeButtons.forEach(function(btn) {{
+                        btn.classList.remove('active');
+                    }});
+
+                    this.classList.add('active');
+                    var fontSize = this.getAttribute('data-size');
+
+                    essayContent.classList.remove('text-sm', 'text-base', 'text-lg');
+                    essayContent.classList.add(fontSize);
+                }});
+            }});
+        }});
+
+        function updateThemeIcon(isDarkMode) {{
+            var themeToggle = document.getElementById('theme-toggle');
+
+            if (isDarkMode) {{
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>';
+            }} else {{
+                themeToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+            }}
+        }}
+    </script>
+</body>
+</html>
+'''
+
+# Function to estimate reading time
+def estimate_reading_time(text):
+    words = len(re.findall(r'\w+', text))
+    minutes = max(1, round(words / 200))  # Assuming 200 words per minute
+    return minutes
+
+# Process each essay file
+for filename in os.listdir(essays_dir):
+    if filename.endswith('.md') and not filename == 'essays.csv':
+        # Extract essay number from filename
+        match = re.match(r'(\d+)_(.+)\.md', filename)
+        if match:
+            essay_number = match.group(1)
+            essay_slug = match.group(2)
+        else:
+            # Try to extract just the name without number
+            essay_slug = filename.replace('.md', '')
+            # Find the essay number in the CSV based on the title
+            essay_number = "000"
+            for num, meta in essays_metadata.items():
+                if meta.get('title', '').lower().replace(' ', '_') in essay_slug.lower():
+                    essay_number = num
+                    break
+
+        # Get metadata from CSV
+        metadata = essays_metadata.get(essay_number, {})
+        title = metadata.get('title', essay_slug.replace('_', ' ').title())
+        date = metadata.get('date', 'Unknown date')
+        original_url = metadata.get('url', 'http://www.paulgraham.com/articles.html')
+
+        # Read the markdown content
+        with open(os.path.join(essays_dir, filename), 'r', encoding='utf-8') as f:
+            markdown_content = f.read()
+
+        # Convert markdown to HTML
+        try:
+            html_content = markdown.markdown(markdown_content, extensions=['extra'])
+        except Exception as e:
+            print(f"Error converting {filename} to HTML: {e}")
+            html_content = f"<p>{markdown_content}</p>"
+
+        # Estimate reading time
+        reading_time = estimate_reading_time(markdown_content)
+
+        # Create the HTML file
+        output_filename = f"{essay_slug}.html"
+        output_path = os.path.join(output_dir, output_filename)
+
+        # Fill in the template
+        html_output = html_template.format(
+            title=title,
+            number=essay_number,
+            date=date,
+            reading_time=reading_time,
+            original_url=original_url,
+            content=html_content,
+            download_url=filename,
+            slug=essay_slug
+        )
+
+        # Write the HTML file
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html_output)
+
+        print(f"Generated {output_path}")
+
+print("Essay page generation complete!")
