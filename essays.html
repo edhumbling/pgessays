@@ -80,19 +80,34 @@
                         All
                     </button>
                     <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="startups">
-                        Startups
+                        Startups & Entrepreneurship
                     </button>
                     <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="programming">
-                        Programming
+                        Programming & Technology
                     </button>
                     <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="life-philosophy">
                         Life & Philosophy
                     </button>
-                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="work-productivity">
-                        Work & Productivity
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="society-economics">
+                        Society & Economics
                     </button>
                     <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="writing-communication">
                         Writing & Communication
+                    </button>
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="personal-growth">
+                        Personal Growth
+                    </button>
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="ycombinator">
+                        Y Combinator
+                    </button>
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="creativity-innovation">
+                        Creativity & Innovation
+                    </button>
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="featured">
+                        Featured Essays
+                    </button>
+                    <button class="px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800 hover:bg-orange-200" data-category="latest">
+                        Latest Essays
                     </button>
                 </div>
             </div>
@@ -226,6 +241,7 @@
         </div>
     </footer>
 
+    <script src="js/categories.js"></script>
     <script src="js/main.js"></script>
     <script>
         // Global search functionality
@@ -276,25 +292,18 @@
                             displayAllEssays(window.essaysData);
                         }
                     } else {
-                        // Filter essays by category
-                        if (window.essaysData) {
-                            var filteredEssays = window.essaysData.filter(function(essay) {
-                                if (essay.category && essay.category.toLowerCase().includes(category.replace('-', ' '))) {
-                                    return true;
-                                }
-                                if (essay['secondary_categories'] && essay['secondary_categories'].toLowerCase().includes(category.replace('-', ' '))) {
-                                    return true;
-                                }
-                                return false;
-                            });
+                        // Filter essays by category using our categories data
+                        if (window.essaysData && window.categoriesData) {
+                            var filteredEssays = filterEssaysByCategory(window.essaysData, category, window.categoriesData);
 
                             if (filteredEssays.length > 0) {
                                 displayAllEssays(filteredEssays);
                             } else {
                                 // No essays found for this category
+                                var categoryName = getCategoryName(category, window.categoriesData) || category.replace('-', ' ');
                                 document.getElementById('all-essays').innerHTML = `
                                     <div class="col-span-3 text-center py-8">
-                                        <p class="text-gray-500">No essays found in the "${category.replace('-', ' ')}" category.</p>
+                                        <p class="text-gray-500">No essays found in the "${categoryName}" category.</p>
                                         <button class="mt-4 inline-block text-orange-500 hover:text-orange-700 category-reset">View all essays</button>
                                     </div>
                                 `;
@@ -305,6 +314,39 @@
                                     resetButton.addEventListener('click', function() {
                                         document.querySelector('[data-category="all"]').click();
                                     });
+                                }
+                            }
+                        } else {
+                            // Fall back to old filtering method if categories data is not available
+                            if (window.essaysData) {
+                                var filteredEssays = window.essaysData.filter(function(essay) {
+                                    if (essay.category && essay.category.toLowerCase().includes(category.replace('-', ' '))) {
+                                        return true;
+                                    }
+                                    if (essay['secondary_categories'] && essay['secondary_categories'].toLowerCase().includes(category.replace('-', ' '))) {
+                                        return true;
+                                    }
+                                    return false;
+                                });
+
+                                if (filteredEssays.length > 0) {
+                                    displayAllEssays(filteredEssays);
+                                } else {
+                                    // No essays found for this category
+                                    document.getElementById('all-essays').innerHTML = `
+                                        <div class="col-span-3 text-center py-8">
+                                            <p class="text-gray-500">No essays found in the "${category.replace('-', ' ')}" category.</p>
+                                            <button class="mt-4 inline-block text-orange-500 hover:text-orange-700 category-reset">View all essays</button>
+                                        </div>
+                                    `;
+
+                                    // Add event listener to the reset button
+                                    var resetButton = document.querySelector('.category-reset');
+                                    if (resetButton) {
+                                        resetButton.addEventListener('click', function() {
+                                            document.querySelector('[data-category="all"]').click();
+                                        });
+                                    }
                                 }
                             }
                         }

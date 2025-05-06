@@ -11,11 +11,23 @@ A modern, responsive website showcasing Paul Graham's essays with online reading
 - **Search & Filter**: Find essays by keyword or topic
 - **Responsive Design**: Optimized for all devices
 - **Dark Mode**: Toggle between light and dark themes
-- **Automatic Updates**: Regularly checks for new essays on Paul Graham's website
+- **Automatic Updates**: Weekly checks for new essays on Paul Graham's website using GitHub Actions
 
 ## How It Works
 
 This website is built on top of the [graham-essays](https://github.com/ofou/graham-essays) repository, which provides a collection of Paul Graham's essays in various formats. The website uses Python scripts to generate HTML, PDF, and EPUB versions of the essays.
+
+### Automatic Updates
+
+This repository is set up with GitHub Actions to automatically check for new essays on Paul Graham's website every week:
+
+1. A GitHub Actions workflow runs every Monday at 00:00 UTC
+2. The workflow checks Paul Graham's website for new essays
+3. If new essays are found, they are downloaded, processed, and added to the repository
+4. The changes are automatically committed and pushed to the repository
+5. Netlify automatically deploys the updated website
+
+You can also manually trigger the update workflow by going to the "Actions" tab in the GitHub repository and selecting "Weekly Essay Update" from the list of workflows. Then click the "Run workflow" button.
 
 ### Technical Details
 

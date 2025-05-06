@@ -4,8 +4,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize theme
     initTheme();
 
-    // Load essays data
-    loadEssaysData();
+    // Load categories data first
+    loadCategoriesData().then(() => {
+        // Preload excerpts for faster loading
+        preloadExcerpts();
+
+        // Load essays data
+        loadEssaysData();
+    });
 
     // Initialize search
     initSearch();
@@ -144,15 +150,37 @@ function displayFeaturedEssays(essays) {
     const featuredEssaysElement = document.getElementById('featured-essays');
     if (!featuredEssaysElement) return;
 
-    // Sort essays by date (newest first)
-    const sortedEssays = [...essays].sort((a, b) => {
-        const dateA = new Date(a['Date'] || '1900-01-01');
-        const dateB = new Date(b['Date'] || '1900-01-01');
-        return dateB - dateA;
-    });
+    // Get featured essays from categories data
+    let featuredEssays = [];
 
-    // Get 3 latest essays
-    const featuredEssays = sortedEssays.slice(0, 3);
+    if (window.categoriesData && window.categoriesData.categories) {
+        const featuredCategory = window.categoriesData.categories.find(cat => cat.id === 'featured');
+        if (featuredCategory && featuredCategory.essays) {
+            // Get the featured essay numbers
+            const featuredNumbers = featuredCategory.essays;
+
+            // Get the latest 3 featured essays
+            const latestFeatured = featuredNumbers.slice(0, 3);
+
+            // Map to full essay objects
+            featuredEssays = latestFeatured.map(number => {
+                return essays.find(essay => essay['Article no.'] === number.toString());
+            }).filter(essay => essay); // Remove any undefined entries
+        }
+    }
+
+    // If we couldn't get featured essays from categories, fall back to latest essays
+    if (featuredEssays.length === 0) {
+        // Sort essays by date (newest first)
+        const sortedEssays = [...essays].sort((a, b) => {
+            const dateA = new Date(a['Date'] || '1900-01-01');
+            const dateB = new Date(b['Date'] || '1900-01-01');
+            return dateB - dateA;
+        });
+
+        // Get 3 latest essays
+        featuredEssays = sortedEssays.slice(0, 3);
+    }
 
     // Check if any essays were added in the last 30 days
     const thirtyDaysAgo = new Date();
@@ -185,6 +213,18 @@ function displayFeaturedEssays(essays) {
         const newTag = isNew ?
             `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>` : '';
 
+        // Get categories for this essay
+        let categoryTags = '';
+        if (window.categoriesData) {
+            categoryTags = generateCategoryTags(number, window.categoriesData);
+        }
+
+        // Check if we have a preloaded excerpt
+        let excerptText = 'Loading excerpt...';
+        if (window.preloadedExcerpts && window.preloadedExcerpts[number]) {
+            excerptText = window.preloadedExcerpts[number];
+        }
+
         return `
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
@@ -196,7 +236,10 @@ function displayFeaturedEssays(essays) {
                         <span class="text-xs text-gray-500">${date}</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
-                    <p class="text-gray-600 mb-4">Loading excerpt...</p>
+                    <p class="text-gray-600 mb-4">${excerptText}</p>
+                    <div class="flex flex-wrap items-center mb-3">
+                        ${categoryTags}
+                    </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
                         <a href="/essays/${displaySlug}.html" class="text-orange-600 hover:text-orange-800 font-medium text-sm">Read more →</a>
@@ -206,32 +249,19 @@ function displayFeaturedEssays(essays) {
         `;
     }).join('');
 
-    // Load excerpts for each essay
+    // Load excerpts for each essay if they weren't preloaded
     featuredEssays.forEach((essay, index) => {
         const number = essay['Article no.'] || '';
-        loadEssayExcerpt(number, index);
+        if (!window.preloadedExcerpts || !window.preloadedExcerpts[number]) {
+            getExcerpt(number, index, '#featured-essays');
+        }
     });
 }
 
-// Load excerpt for an essay
+// Load excerpt for an essay (legacy function, use getExcerpt instead)
 async function loadEssayExcerpt(essayNumber, index) {
-    try {
-        const response = await fetch(`/essays/${essayNumber}.md`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const markdown = await response.text();
-        const excerpt = extractExcerpt(markdown, 150);
-
-        const excerptElements = document.querySelectorAll('#featured-essays p.text-gray-600');
-        if (excerptElements[index]) {
-            excerptElements[index].textContent = excerpt;
-        }
-
-    } catch (error) {
-        console.error(`Error loading excerpt for essay ${essayNumber}:`, error);
-    }
+    // Use the new getExcerpt function instead
+    getExcerpt(essayNumber, index, '#featured-essays');
 }
 
 // Extract an excerpt from the markdown content
@@ -245,6 +275,12 @@ function extractExcerpt(markdown, length = 150) {
         .replace(/[*_~`]/g, '') // Remove emphasis markers
         .replace(/\n+/g, ' ') // Replace newlines with spaces
         .trim();
+
+    // Skip date paragraphs (like "May 2020")
+    const dateRegex = /(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}/;
+    if (dateRegex.test(text.substring(0, 20))) {
+        text = text.substring(text.indexOf(' ', 20) + 1).trim();
+    }
 
     // Truncate to the specified length
     if (text.length > length) {
@@ -382,9 +418,6 @@ function displayAllEssays(essays) {
         const title = essay['Title'] || '';
         const date = essay['Date'] || '';
         const url = essay['URL'] || '';
-        const category = essay['Category'] || '';
-        const secondaryCategories = essay['Secondary Categories'] || '';
-        const tags = essay['Tags'] || '';
 
         // Create a slug from the title for the local URL
         let displaySlug = title.toLowerCase();
@@ -403,10 +436,16 @@ function displayAllEssays(essays) {
         const newTag = isNew ?
             `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>` : '';
 
-        // Category HTML
-        let categoryHtml = '';
-        if (category) {
-            categoryHtml = `<span class="mr-2 text-xs font-semibold inline-block py-1 px-2 rounded-full text-white bg-orange-500">${category}</span>`;
+        // Get categories for this essay
+        let categoryTags = '';
+        if (window.categoriesData) {
+            categoryTags = generateCategoryTags(number, window.categoriesData);
+        }
+
+        // Check if we have a preloaded excerpt
+        let excerptText = 'Loading excerpt...';
+        if (window.preloadedExcerpts && window.preloadedExcerpts[number]) {
+            excerptText = window.preloadedExcerpts[number];
         }
 
         return `
@@ -420,9 +459,9 @@ function displayAllEssays(essays) {
                         <span class="text-xs text-gray-500">${date}</span>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
-                    <p class="text-gray-600 mb-4">Loading excerpt...</p>
+                    <p class="text-gray-600 mb-4">${excerptText}</p>
                     <div class="flex flex-wrap items-center mb-3">
-                        ${categoryHtml}
+                        ${categoryTags}
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
@@ -433,10 +472,12 @@ function displayAllEssays(essays) {
         `;
     }).join('');
 
-    // Load excerpts for each essay
+    // Load excerpts for each essay if they weren't preloaded
     sortedEssays.forEach((essay, index) => {
         const number = essay['Article no.'] || '';
-        loadEssayExcerpt(number, index);
+        if (!window.preloadedExcerpts || !window.preloadedExcerpts[number]) {
+            getExcerpt(number, index, '#all-essays');
+        }
     });
 }
 
