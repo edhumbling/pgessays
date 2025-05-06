@@ -256,17 +256,42 @@ function extractExcerpt(markdown, length = 150) {
 
 // Initialize search functionality
 function initSearch() {
+    // Handle regular search input
     const searchInput = document.getElementById('search-input');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                }
             }
+        });
+    }
+
+    // Handle global search input
+    const globalSearch = document.getElementById('global-search');
+    if (globalSearch) {
+        globalSearch.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = globalSearch.value.trim();
+                if (query) {
+                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+
+        // Also handle the search button click
+        const searchButton = document.querySelector('button[type="button"]');
+        if (searchButton) {
+            searchButton.addEventListener('click', function() {
+                const query = globalSearch.value.trim();
+                if (query) {
+                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                }
+            });
         }
-    });
+    }
 
     // If we're on the essays page and there's a query parameter, perform the search
     if (window.location.pathname.includes('essays.html')) {
@@ -274,7 +299,10 @@ function initSearch() {
         const query = urlParams.get('q');
 
         if (query) {
-            searchInput.value = query;
+            // Update both search inputs if they exist
+            if (searchInput) searchInput.value = query;
+            if (globalSearch) globalSearch.value = query;
+
             performSearch(query);
         }
     }
