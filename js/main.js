@@ -100,10 +100,30 @@ async function loadEssaysData() {
 // Parse CSV data into an array of essay objects
 function parseCSV(csvText) {
     const lines = csvText.split('\n');
-    const headers = lines[0].split(',');
+    const headers = lines[0].split(',').map(header => header.trim());
 
     return lines.slice(1).filter(line => line.trim() !== '').map(line => {
-        const values = line.split(',');
+        // Handle commas within quoted fields
+        const values = [];
+        let currentValue = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+
+            if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                values.push(currentValue);
+                currentValue = '';
+            } else {
+                currentValue += char;
+            }
+        }
+
+        // Add the last value
+        values.push(currentValue);
+
         const essay = {};
 
         headers.forEach((header, index) => {
@@ -112,7 +132,7 @@ function parseCSV(csvText) {
             if (value.startsWith('"') && value.endsWith('"')) {
                 value = value.substring(1, value.length - 1);
             }
-            essay[header.trim()] = value;
+            essay[header] = value;
         });
 
         return essay;
@@ -265,8 +285,31 @@ function performSearch(query) {
     if (!window.essaysData) return;
 
     const searchResults = window.essaysData.filter(essay => {
+        // Search in title
         const title = essay['Title'] || '';
-        return title.toLowerCase().includes(query.toLowerCase());
+        if (title.toLowerCase().includes(query.toLowerCase())) {
+            return true;
+        }
+
+        // Search in category
+        const category = essay['Category'] || '';
+        if (category.toLowerCase().includes(query.toLowerCase())) {
+            return true;
+        }
+
+        // Search in secondary categories
+        const secondaryCategories = essay['Secondary Categories'] || '';
+        if (secondaryCategories.toLowerCase().includes(query.toLowerCase())) {
+            return true;
+        }
+
+        // Search in tags
+        const tags = essay['Tags'] || '';
+        if (tags.toLowerCase().includes(query.toLowerCase())) {
+            return true;
+        }
+
+        return false;
     });
 
     const allEssaysElement = document.getElementById('all-essays');
@@ -284,7 +327,7 @@ function performSearch(query) {
         allEssaysElement.innerHTML = `
             <div class="col-span-3 text-center py-8">
                 <p class="text-gray-500">No essays found matching "${query}".</p>
-                <a href="/essays.html" class="mt-4 inline-block text-indigo-600 hover:text-indigo-800">View all essays</a>
+                <a href="/essays.html" class="mt-4 inline-block text-orange-500 hover:text-orange-700">View all essays</a>
             </div>
         `;
     }
@@ -311,6 +354,9 @@ function displayAllEssays(essays) {
         const title = essay['Title'] || '';
         const date = essay['Date'] || '';
         const url = essay['URL'] || '';
+        const category = essay['Category'] || '';
+        const secondaryCategories = essay['Secondary Categories'] || '';
+        const tags = essay['Tags'] || '';
 
         // Create a slug from the title for the local URL
         let displaySlug = title.toLowerCase();
@@ -329,6 +375,12 @@ function displayAllEssays(essays) {
         const newTag = isNew ?
             `<span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>` : '';
 
+        // Category HTML
+        let categoryHtml = '';
+        if (category) {
+            categoryHtml = `<span class="mr-2 text-xs font-semibold inline-block py-1 px-2 rounded-full text-white bg-orange-500">${category}</span>`;
+        }
+
         return `
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6">
@@ -341,6 +393,9 @@ function displayAllEssays(essays) {
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">${title}</h3>
                     <p class="text-gray-600 mb-4">Loading excerpt...</p>
+                    <div class="flex flex-wrap items-center mb-3">
+                        ${categoryHtml}
+                    </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
                         <a href="/essays/${displaySlug}.html" class="text-orange-500 hover:text-orange-700 font-medium text-sm">Read more →</a>

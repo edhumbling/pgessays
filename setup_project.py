@@ -39,6 +39,7 @@ def setup_project():
         ('create-essay-html.py', 'create-essay-html.py'),
         ('generate_sitemap.py', 'generate_sitemap.py'),
         ('scrape_new_essays.py', 'scrape_new_essays.py'),
+        ('categorize_essays.py', 'categorize_essays.py'),
         ('index.js', 'index.js'),
         ('package.json', 'package.json'),
         ('robots.txt', 'robots.txt'),
