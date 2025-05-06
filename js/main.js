@@ -150,10 +150,69 @@ function displayFeaturedEssays(essays) {
     const featuredEssaysElement = document.getElementById('featured-essays');
     if (!featuredEssaysElement) return;
 
-    // Get featured essays from categories data
+    // Get featured essays from categories data and reading metrics
     let featuredEssays = [];
 
-    if (window.categoriesData && window.categoriesData.categories) {
+    // Try to get popular essays from reading metrics
+    let popularEssayIds = [];
+    try {
+        // Get popular essays from Supabase or localStorage
+        if (typeof getPopularEssays === 'function') {
+            // This is an async function, but we'll handle it synchronously for now
+            // In a future update, we could make displayFeaturedEssays async
+            const localPopularEssays = JSON.parse(localStorage.getItem('pgEssaysPopular') || '{}');
+
+            // Convert to array and sort by count
+            const popularEssayEntries = Object.entries(localPopularEssays)
+                .map(([id, count]) => ({ id, count }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 5); // Get top 5
+
+            // Extract IDs
+            popularEssayEntries.forEach(entry => popularEssayIds.push(entry.id));
+
+            // Try to get from API in the background
+            if (window.pgEssaysApi) {
+                window.pgEssaysApi.getPopularEssays(5).then(apiPopularEssays => {
+                    if (apiPopularEssays && apiPopularEssays.length > 0) {
+                        // We'll update the UI next time
+                        console.log('Got popular essays from API for next refresh');
+                    }
+                }).catch(error => {
+                    console.error('Error getting popular essays from API:', error);
+                });
+            }
+        }
+    } catch (e) {
+        console.error('Error getting popular essays:', e);
+    }
+
+    // Get latest essays
+    const latestEssays = [...essays].sort((a, b) => {
+        const dateA = new Date(a['Date'] || '1900-01-01');
+        const dateB = new Date(b['Date'] || '1900-01-01');
+        return dateB - dateA;
+    }).slice(0, 3); // Get 3 latest
+
+    // Combine popular and latest essays
+    const combinedEssayIds = new Set([
+        ...popularEssayIds,
+        ...latestEssays.map(essay => essay['Article no.'])
+    ]);
+
+    // If we have combined essays, use them
+    if (combinedEssayIds.size > 0) {
+        // Map to full essay objects
+        featuredEssays = Array.from(combinedEssayIds)
+            .slice(0, 3) // Limit to 3 essays
+            .map(number => {
+                return essays.find(essay => essay['Article no.'] === number.toString());
+            })
+            .filter(essay => essay); // Remove any undefined entries
+    }
+
+    // Fallback to category-based featured essays if needed
+    if (featuredEssays.length === 0 && window.categoriesData && window.categoriesData.categories) {
         const featuredCategory = window.categoriesData.categories.find(cat => cat.id === 'featured');
         if (featuredCategory && featuredCategory.essays) {
             // Get the featured essay numbers

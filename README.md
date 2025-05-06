@@ -12,6 +12,9 @@ A modern, responsive website showcasing Paul Graham's essays with online reading
 - **Responsive Design**: Optimized for all devices
 - **Dark Mode**: Toggle between light and dark themes
 - **Automatic Updates**: Weekly checks for new essays on Paul Graham's website using GitHub Actions
+- **Reading Metrics**: Tracks reading progress with a glass effect progress bar
+- **Popular Essays**: Features popular essays based on reading metrics
+- **Comprehensive Categorization**: Essays are categorized into multiple topics for easy browsing
 
 ## How It Works
 
@@ -74,9 +77,18 @@ You can also manually trigger the update workflow by going to the "Actions" tab 
    python generate_pdf_epub.py
    ```
 
-6. Start a local server:
+6. Start the local servers (HTTP and API):
    ```bash
-   python -m http.server 8000
+   python start_server.py
+   ```
+
+   This will start:
+   - The HTTP server at `http://localhost:8000`
+   - The API server at `http://localhost:8080`
+
+   If you have a Supabase service key, you can provide it:
+   ```bash
+   python start_server.py --supabase-key your_service_key_here
    ```
 
 7. Open your browser and navigate to `http://localhost:8000`
@@ -106,14 +118,29 @@ If you want to deploy to your own Netlify site:
 pgessays/
 ├── css/                  # CSS stylesheets
 ├── js/                   # JavaScript files
+│   ├── api-client.js     # Client for the metrics API
+│   ├── categories.js     # Essay categorization
+│   ├── reading-metrics.js # Reading progress tracking
+│   └── main.js           # Main JavaScript functionality
 ├── essays/               # Markdown essays
+│   └── categories.json   # Essay categorization data
+├── api/                  # API server for metrics
+│   └── metrics.py        # API endpoints for reading metrics
+├── templates/            # HTML templates
+│   └── essay_template.html # Template for essay pages
 ├── downloads/            # Generated download files
 │   ├── pdf/              # Individual PDF files
 │   ├── epub/             # Individual EPUB files
 │   └── combined/         # Combined PDF and EPUB files
-├── create-essay-html.py  # Script to generate HTML files
+├── .github/workflows/    # GitHub Actions workflows
+│   └── weekly-essay-update.yml # Automatic essay updates
+├── create_essay_html.py  # Script to generate HTML files
 ├── generate_pdf_epub.py  # Script to generate PDF and EPUB files
 ├── setup_project.py      # Script to set up the project
+├── update_essays_auto.py # Script to update essays automatically
+├── fix_local_dates.py    # Script to fix essay dates
+├── run_api_server.py     # Script to run the API server
+├── start_server.py       # Script to start both servers
 ├── netlify.toml          # Netlify configuration
 └── requirements.txt      # Python dependencies
 ```

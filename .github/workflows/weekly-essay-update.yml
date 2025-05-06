@@ -22,10 +22,22 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 html2text pandas
+          pip install requests beautifulsoup4 html2text pandas markdown jinja2 supabase python-dotenv
 
       - name: Run essay update script
         run: python update_essays_auto.py
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Fix essay dates
+        run: python fix_local_dates.py
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Create HTML files
+        run: python create_essay_html.py
+        env:
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
       - name: Commit and push if changes
         run: |

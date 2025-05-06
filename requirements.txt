@@ -23,3 +23,6 @@ tzdata==2025.2
 tzlocal==5.3.1
 Unidecode==1.4.0
 urllib3==2.4.0
+supabase==1.0.3
+python-dotenv==1.0.0
+jinja2==3.1.2

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Paul Graham Essays</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-3xl font-bold text-gray-900">Paul Graham Essays</h1>
+                    <p class="mt-2 text-gray-600">A collection of essays by Paul Graham, co-founder of Y Combinator</p>
+                </div>
+                <div>
+                    <button id="theme-toggle" class="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Search Bar -->
+    <div class="bg-orange-500 py-4 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative max-w-3xl mx-auto">
+                <input type="text" id="global-search" placeholder="Search all essays..." class="block w-full pl-10 pr-3 py-3 border-2 border-orange-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 sm:text-sm md:text-base">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                    <svg class="h-5 w-5 text-orange-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-4 text-orange-600 hover:text-orange-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7 9a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-between h-auto md:h-16">
+                <div class="flex flex-wrap w-full md:w-auto py-2">
+                    <div class="flex-shrink-0 flex items-center w-full md:w-auto mb-2 md:mb-0">
+                        <a href="/index.html" class="text-gray-500 hover:text-gray-700">Home</a>
+                    </div>
+                    <div class="ml-0 md:ml-6 flex flex-wrap md:flex-nowrap space-y-2 md:space-y-0 md:space-x-8 w-full md:w-auto">
+                        <a href="/essays.html" class="border-transparent text-gray-500 hover:border-orange-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Essays
+                        </a>
+                        <a href="/download.html" class="border-transparent text-gray-500 hover:border-orange-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Download
+                        </a>
+                        <a href="/about.html" class="border-transparent text-gray-500 hover:border-orange-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            About
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-4 py-5 sm:p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-100">#{{article_no}}</span>
+                        {{#if is_new}}
+                        <span class="ml-2 text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-orange-500">NEW</span>
+                        {{/if}}
+                    </div>
+                    <span class="text-xs text-gray-500">{{date}}</span>
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">{{article_no}} {{title}}</h1>
+
+                <div class="flex flex-wrap items-center mb-6">
+                    {{#each categories}}
+                    <span class="tag {{#if @first}}category-primary{{else}}category-secondary{{/if}}" data-category="{{this}}">{{this}}</span>
+                    {{/each}}
+                </div>
+
+                <div class="font-size-controls mb-6">
+                    <button class="text-sm" data-size="small">A</button>
+                    <button class="text-base active" data-size="medium">A</button>
+                    <button class="text-lg" data-size="large">A</button>
+                </div>
+
+                <div class="essay-content">
+                    {{content}}
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <div class="flex flex-wrap items-center">
+                        <span class="text-sm text-gray-500 mr-4">Tags:</span>
+                        {{#each tags}}
+                        <span class="tag category-secondary">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    {{#if prev_essay}}
+                    <a href="{{prev_essay.url}}" class="inline-flex items-center text-orange-500 hover:text-orange-700">
+                        <svg class="h-5 w-5 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        {{prev_essay.title}}
+                    </a>
+                    {{else}}
+                    <div></div>
+                    {{/if}}
+
+                    {{#if next_essay}}
+                    <a href="{{next_essay.url}}" class="inline-flex items-center text-orange-500 hover:text-orange-700">
+                        {{next_essay.title}}
+                        <svg class="h-5 w-5 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    {{else}}
+                    <div></div>
+                    {{/if}}
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-base text-gray-500">
+                All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
+            </p>
+            <p class="text-center text-sm text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-orange-500 hover:text-orange-700">graham-essays</a> repository.
+            </p>
+        </div>
+    </footer>
+
+    <script src="/js/api-client.js"></script>
+    <script src="/js/categories.js"></script>
+    <script src="/js/reading-metrics.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+        // Font size controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const fontSizeButtons = document.querySelectorAll('.font-size-controls button');
+            const essayContent = document.querySelector('.essay-content');
+
+            if (fontSizeButtons.length > 0 && essayContent) {
+                // Check for saved font size preference
+                const savedSize = localStorage.getItem('essayFontSize');
+                if (savedSize) {
+                    setFontSize(savedSize);
+
+                    // Update active button
+                    fontSizeButtons.forEach(button => {
+                        button.classList.remove('active');
+                        if (button.getAttribute('data-size') === savedSize) {
+                            button.classList.add('active');
+                        }
+                    });
+                }
+
+                // Add event listeners to font size buttons
+                fontSizeButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const size = this.getAttribute('data-size');
+
+                        // Update active button
+                        fontSizeButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // Set font size
+                        setFontSize(size);
+
+                        // Save preference
+                        localStorage.setItem('essayFontSize', size);
+                    });
+                });
+            }
+
+            function setFontSize(size) {
+                if (!essayContent) return;
+
+                essayContent.classList.remove('text-sm', 'text-base', 'text-lg', 'text-xl');
+
+                switch (size) {
+                    case 'small':
+                        essayContent.classList.add('text-sm');
+                        break;
+                    case 'medium':
+                        essayContent.classList.add('text-base');
+                        break;
+                    case 'large':
+                        essayContent.classList.add('text-lg');
+                        break;
+                    case 'xlarge':
+                        essayContent.classList.add('text-xl');
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

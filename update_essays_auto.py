@@ -35,7 +35,7 @@ def setup_directories():
 def get_existing_essays():
     """Get the list of existing essays from the essays.csv file."""
     existing_essays = {}
-    
+
     if os.path.exists(ESSAYS_CSV):
         try:
             df = pd.read_csv(ESSAYS_CSV)
@@ -48,43 +48,43 @@ def get_existing_essays():
             print(f"Found {len(existing_essays)} existing essays in {ESSAYS_CSV}")
         except Exception as e:
             print(f"Error reading {ESSAYS_CSV}: {e}")
-    
+
     return existing_essays
 
 def fetch_essay_list():
     """Fetch the list of essays from Paul Graham's website."""
     headers = {"User-Agent": USER_AGENT}
-    
+
     try:
         response = requests.get(PG_ARTICLES_URL, headers=headers)
         response.raise_for_status()
-        
+
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Find all links in the page
         links = soup.find_all('a')
-        
+
         essays = []
         for link in links:
             href = link.get('href')
             title = link.get_text().strip()
-            
+
             # Skip empty links or non-essay links
             if not href or not title or href.startswith('#') or href.startswith('mailto:'):
                 continue
-                
+
             # Convert relative URLs to absolute
             url = urljoin(PG_ARTICLES_URL, href)
-            
+
             # Only include links to paulgraham.com essays
             if 'paulgraham.com' in url and title:
                 essays.append({
                     'title': title,
                     'url': url
                 })
-        
+
         return essays
-    
+
     except Exception as e:
         print(f"Error fetching essay list: {e}")
         return []
@@ -92,52 +92,80 @@ def fetch_essay_list():
 def extract_date_from_essay(content):
     """Extract the date from the essay content."""
     soup = BeautifulSoup(content, 'html.parser')
-    
+
     # Look for a date pattern in the text
     text = soup.get_text()
-    
+
     # First, try to find a standalone date line (like "March 2025")
     date_patterns = [
+        # Standard month year format
         r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}',
+        # Abbreviated month format
+        r'(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\.?\s+\d{4}',
+        # Date with day format
+        r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}',
     ]
-    
+
+    # First, look for dates at the beginning of the text (more likely to be the publication date)
+    first_paragraph = text.split('\n')[0]
+    for pattern in date_patterns:
+        match = re.search(pattern, first_paragraph)
+        if match:
+            return match.group(0)
+
+    # If not found in the first paragraph, search the entire text
     for pattern in date_patterns:
         match = re.search(pattern, text)
         if match:
-            return match.group(0)
-    
+            # Verify this isn't a reference to another date in the content
+            date_str = match.group(0)
+            # Check if the date appears at the beginning of a paragraph or after a newline
+            date_pos = text.find(date_str)
+            if date_pos > 0:
+                prev_char = text[date_pos-1]
+                if prev_char in ['\n', '.', '!', '?']:
+                    return date_str
+            else:
+                return date_str
+
+    # If still not found, look for any year that might be a publication date
+    # This is a fallback and less reliable
+    year_match = re.search(r'\b(20\d{2}|19\d{2})\b', text[:500])  # Look only in first 500 chars
+    if year_match:
+        return year_match.group(0)
+
     return ""
 
 def fetch_essay_content(url):
     """Fetch the content of an essay from the given URL."""
     headers = {"User-Agent": USER_AGENT}
-    
+
     try:
         # Add a small delay to avoid being blocked
         time.sleep(random.uniform(0.2, 0.5))
-        
+
         response = requests.get(url, headers=headers)
         response.raise_for_status()
-        
+
         # Extract the date from the essay content
         date = extract_date_from_essay(response.text)
-        
+
         # Extract the main content
         soup = BeautifulSoup(response.text, 'html.parser')
         main_content = soup.find('body')
-        
+
         # Convert HTML to markdown
         h2t = html2text.HTML2Text()
         h2t.ignore_links = False
         h2t.ignore_images = False
         h2t.ignore_tables = False
         markdown_content = h2t.handle(str(main_content))
-        
+
         return {
             'content': markdown_content,
             'date': date
         }
-    
+
     except Exception as e:
         print(f"Error fetching essay content from {url}: {e}")
         return {'content': '', 'date': ''}
@@ -148,10 +176,10 @@ def save_essay(title, url, content, date, article_no):
     filename = title.lower()
     filename = re.sub(r'[^\w\s]', '', filename)  # Remove punctuation
     filename = re.sub(r'\s+', '_', filename)     # Replace spaces with underscores
-    
+
     # Add the article number as a prefix
     markdown_filename = f"{article_no}_{filename}.md"
-    
+
     # Save the markdown version
     markdown_filepath = os.path.join(ESSAYS_DIR, markdown_filename)
     with open(markdown_filepath, 'w', encoding='utf-8') as f:
@@ -159,7 +187,7 @@ def save_essay(title, url, content, date, article_no):
         if date:
             f.write(f"{date}\n\n")
         f.write(content)
-    
+
     print(f"Saved essay to {markdown_filepath}")
 
 def update_essays_csv(new_essays, existing_essays):
@@ -170,7 +198,7 @@ def update_essays_csv(new_essays, existing_essays):
     else:
         # Create a new DataFrame with the required columns
         df = pd.DataFrame(columns=['Article no.', 'Title', 'Date', 'URL'])
-    
+
     # Add new essays to the DataFrame
     for essay in new_essays:
         # Check if the essay already exists in the DataFrame
@@ -180,10 +208,10 @@ def update_essays_csv(new_essays, existing_essays):
                 next_article_no = int(df['Article no.'].max()) + 1
             else:
                 next_article_no = 1
-                
+
             # Format the article number
             article_no = str(next_article_no)
-            
+
             # Add the essay to the DataFrame
             new_row = {
                 'Article no.': article_no,
@@ -192,32 +220,32 @@ def update_essays_csv(new_essays, existing_essays):
                 'URL': essay['url']
             }
             df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
-            
+
             # Save the essay content
             save_essay(essay['title'], essay['url'], essay['content'], essay['date'], article_no)
-    
+
     # Save the updated DataFrame to CSV
     df.to_csv(ESSAYS_CSV, index=False)
-    
+
     print(f"Updated {ESSAYS_CSV} with {len(new_essays)} new essays")
 
 def main():
     """Main function to check for new essays."""
     print(f"Starting essay check at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    
+
     # Ensure the essays directory exists
     setup_directories()
-    
+
     # Get existing essays
     existing_essays = get_existing_essays()
-    
+
     # Fetch the list of essays from Paul Graham's website
     essays = fetch_essay_list()
-    
+
     if not essays:
         print("Error: Could not fetch essays from Paul Graham's website")
         return
-    
+
     # Paul Graham's essays are listed with the newest first
     # So we can stop as soon as we find an essay we already have
     new_essays = []
@@ -225,12 +253,12 @@ def main():
         if essay['url'] in existing_essays:
             print(f"Found existing essay: {essay['title']} - stopping search")
             break
-        
+
         print(f"Found new essay: {essay['title']} ({essay['url']})")
-        
+
         # Fetch the content of the new essay
         content_data = fetch_essay_content(essay['url'])
-        
+
         if content_data['content']:
             new_essays.append({
                 'title': essay['title'],
@@ -238,14 +266,14 @@ def main():
                 'content': content_data['content'],
                 'date': content_data['date']
             })
-    
+
     # Update the essays.csv file with new essays
     if new_essays:
         update_essays_csv(new_essays, existing_essays)
         print(f"Added {len(new_essays)} new essays")
     else:
         print("No new essays found")
-    
+
     print(f"Finished essay check at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 if __name__ == "__main__":
