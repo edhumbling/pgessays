@@ -19,7 +19,7 @@ def copy_directory(src, dst):
 def setup_project():
     """Set up the project structure."""
     # Define source and destination directories
-    source_dir = '../pg-essays-website'
+    source_dir = '.'
     dest_dir = '.'
 
     # Create necessary directories
@@ -52,26 +52,41 @@ def setup_project():
         src_path = os.path.join(source_dir, src)
         dst_path = os.path.join(dest_dir, dst)
 
+        # Skip if source and destination are the same
+        if os.path.abspath(src_path) == os.path.abspath(dst_path):
+            continue
+
         if os.path.exists(src_path):
             # Ensure the directory exists
             os.makedirs(os.path.dirname(dst_path), exist_ok=True)
             # Copy the file
-            shutil.copy2(src_path, dst_path)
-            print(f"Copied {src} to {dst}")
+            try:
+                shutil.copy2(src_path, dst_path)
+                print(f"Copied {src} to {dst}")
+            except Exception as e:
+                print(f"Warning: Could not copy {src_path} to {dst_path}: {e}")
         else:
-            print(f"Warning: {src_path} does not exist")
+            # If the file doesn't exist in the source, but exists in the destination, keep it
+            if not os.path.exists(dst_path):
+                print(f"Warning: {src_path} does not exist")
 
     # Copy all essay markdown files
     essays_src = os.path.join(source_dir, 'essays')
     essays_dst = os.path.join(dest_dir, 'essays')
 
-    if os.path.exists(essays_src):
+    # Skip if source and destination are the same
+    if os.path.abspath(essays_src) == os.path.abspath(essays_dst):
+        print("Source and destination essays directories are the same, skipping copy")
+    elif os.path.exists(essays_src):
         for file in os.listdir(essays_src):
             if file.endswith('.md') and file != 'essays.csv':
                 src_path = os.path.join(essays_src, file)
                 dst_path = os.path.join(essays_dst, file)
-                shutil.copy2(src_path, dst_path)
-                print(f"Copied essay {file}")
+                try:
+                    shutil.copy2(src_path, dst_path)
+                    print(f"Copied essay {file}")
+                except Exception as e:
+                    print(f"Warning: Could not copy {src_path} to {dst_path}: {e}")
     else:
         print(f"Warning: {essays_src} does not exist")
 
