@@ -40,6 +40,53 @@
         .dark-mode .gallery-container {
             background-color: #2d3748;
         }
+
+        /* Custom styles for this page */
+        .search-bar-container {
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Make text smaller and cuter */
+        p {
+            font-size: 0.875rem !important;
+            line-height: 1.5 !important;
+            letter-spacing: 0.01em !important;
+        }
+
+        /* Emphasis for important text */
+        .text-emphasis {
+            font-weight: 600;
+            color: #f97316 !important;
+        }
+
+        /* Improved mobile navigation */
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 0.5rem 0;
+            }
+
+            .mobile-nav a {
+                padding: 0.5rem 1rem;
+                border-radius: 9999px;
+                background-color: #fff;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                font-size: 0.75rem;
+                font-weight: 500;
+                text-align: center;
+                min-width: 80px;
+            }
+
+            .mobile-nav a.active {
+                background-color: #f97316;
+                color: white;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -61,7 +108,29 @@
         </div>
     </header>
 
-    <nav class="bg-white shadow-sm">
+    <!-- Global Search Bar -->
+    <div class="bg-orange-500 py-4 shadow-md search-bar-container">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative max-w-3xl mx-auto">
+                <input type="text" id="global-search" placeholder="✨ Search all essays..." class="block w-full pl-10 pr-3 py-3 border-2 border-orange-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-orange-300 focus:border-orange-300 sm:text-sm md:text-base shadow-lg">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                    <svg class="h-5 w-5 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-4 text-orange-600 hover:text-orange-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7 9a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <p class="text-center text-white text-xs mt-2">Find wisdom on startups, programming, and life philosophy</p>
+        </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="bg-white shadow-sm hidden md:block">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
@@ -69,29 +138,37 @@
                         <a href="index.html" class="text-gray-500 hover:text-gray-700">Home</a>
                     </div>
                     <div class="ml-6 flex space-x-8">
-                        <a href="essays.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="essays.html" class="border-transparent text-gray-500 hover:border-orange-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Essays
                         </a>
-                        <a href="download.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="download.html" class="border-transparent text-gray-500 hover:border-orange-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Download
                         </a>
-                        <a href="about.html" class="border-indigo-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="about.html" class="border-orange-500 text-gray-900 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             About
                         </a>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <div class="relative">
-                            <input type="text" id="search-input" placeholder="Search essays..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="bg-white shadow-sm md:hidden py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mobile-nav">
+                <a href="index.html" class="text-gray-500 hover:text-gray-700">
+                    Home
+                </a>
+                <a href="essays.html" class="text-gray-500 hover:text-gray-700">
+                    Essays
+                </a>
+                <a href="download.html" class="text-gray-500 hover:text-gray-700">
+                    Download
+                </a>
+                <a href="about.html" class="active">
+                    About
+                </a>
             </div>
         </div>
     </nav>
@@ -133,10 +210,10 @@
                         <div class="px-4 py-5 sm:p-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">About Paul Graham</h3>
                             <div class="prose max-w-none">
-                                <p>Paul Graham is a programmer, venture capitalist, and essayist. He is known for his work on Lisp, for co-founding Viaweb (which eventually became Yahoo! Store), and for co-founding the Y Combinator seed capital firm.</p>
-                                <p>Graham is the author of several programming books, such as: On Lisp (1993), ANSI Common Lisp (1995), and Hackers & Painters (2004). He is also known for creating the Bayesian spam filter.</p>
+                                <p>Paul Graham is a <span class="text-emphasis">programmer</span>, <span class="text-emphasis">venture capitalist</span>, and <span class="text-emphasis">essayist</span>. He is known for his work on Lisp, for co-founding Viaweb (which eventually became Yahoo! Store), and for co-founding the Y Combinator seed capital firm.</p>
+                                <p>Graham is the author of several programming books, such as: <span class="text-emphasis">On Lisp (1993)</span>, <span class="text-emphasis">ANSI Common Lisp (1995)</span>, and <span class="text-emphasis">Hackers & Painters (2004)</span>. He is also known for creating the Bayesian spam filter.</p>
                                 <p>In addition to his technical work, Graham is known for his essays on entrepreneurship, programming, and life philosophy. His essays are widely read in the tech and startup communities and have influenced many entrepreneurs and programmers.</p>
-                                <p>In 2005, Graham co-founded Y Combinator with Jessica Livingston, Robert Morris, and Trevor Blackwell. Y Combinator was the first of a new type of startup incubator and has funded over 2,000 startups, including Stripe, Airbnb, Dropbox, Coinbase, and Reddit. You can see photos of Paul with some of the Y Combinator founders in the gallery at the bottom of this page.</p>
+                                <p>In 2005, Graham co-founded Y Combinator with Jessica Livingston, Robert Morris, and Trevor Blackwell. Y Combinator was the first of a new type of startup incubator and has funded over <span class="text-emphasis">2,000 startups</span>, including Stripe, Airbnb, Dropbox, Coinbase, and Reddit. You can see photos of Paul with some of the Y Combinator founders in the gallery at the bottom of this page.</p>
                             </div>
                         </div>
                     </div>
@@ -145,8 +222,8 @@
                         <div class="px-4 py-5 sm:p-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">About This Website</h3>
                             <div class="prose max-w-none">
-                                <p>This website is a collection of essays by Paul Graham. It provides a clean, modern, and accessible way to read Paul Graham's essays and download them in various formats for offline reading.</p>
-                                <p>The website is automatically updated every week to include new essays as they are published on Paul Graham's website, ensuring you always have access to his latest thoughts and insights.</p>
+                                <p>This website is a collection of essays by Paul Graham. It provides a <span class="text-emphasis">clean</span>, <span class="text-emphasis">modern</span>, and <span class="text-emphasis">accessible</span> way to read Paul Graham's essays and download them in EPUB format for offline reading.</p>
+                                <p>The website is <span class="text-emphasis">automatically updated every week</span> to include new essays as they are published on Paul Graham's website, ensuring you always have access to his latest thoughts and insights.</p>
                                 <p>All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.</p>
                             </div>
                         </div>
@@ -156,10 +233,10 @@
                         <div class="px-4 py-5 sm:p-6">
                             <h3 class="text-lg font-medium text-gray-900 mb-4">About the Developer</h3>
                             <div class="prose max-w-none">
-                                <p>This website was created by Emmanuel Humbling, a developer who has been deeply influenced by Paul Graham's essays and the impact of his work.</p>
+                                <p>This website was created by <span class="text-emphasis">Emmanuel Humbling</span>, a developer who has been deeply influenced by Paul Graham's essays and the impact of his work.</p>
                                 <p>I've long admired Paul Graham not just for his technical insights, but for his ability to articulate complex ideas about startups, technology, and life in a clear and compelling way. What Paul and his friends have accomplished over the years through Y Combinator has transformed the startup ecosystem and created a platform for thousands of founders to bring their ideas to life.</p>
                                 <p>His essays have shaped my thinking about technology, entrepreneurship, and problem-solving. This website is my small contribution to help make these valuable writings more accessible to everyone.</p>
-                                <p>You can connect with me on <a href="https://twitter.com/edhumbling" class="text-indigo-600 hover:text-indigo-900">Twitter (@edhumbling)</a> or <a href="https://linkedin.com/in/edhumbling" class="text-indigo-600 hover:text-indigo-900">LinkedIn</a>.</p>
+                                <p>You can connect with me on <a href="https://twitter.com/edhumbling" class="text-orange-500 hover:text-orange-700">Twitter (@edhumbling)</a> or <a href="https://linkedin.com/in/edhumbling" class="text-orange-500 hover:text-orange-700">LinkedIn</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -209,19 +286,22 @@
     </main>
 
     <footer class="bg-white border-t border-gray-200">
-        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-            <p class="text-center text-base text-gray-500">
+        <div class="max-w-7xl mx-auto py-8 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <p class="text-center text-xs text-gray-500">
                 All essays are property of © Paul Graham. This website is not affiliated with Paul Graham.
             </p>
-            <p class="text-center text-sm text-gray-500 mt-2">
-                Based on the <a href="https://github.com/ofou/graham-essays" class="text-indigo-600 hover:text-indigo-800">graham-essays</a> repository.
+            <p class="text-center text-xs text-gray-500 mt-2">
+                Based on the <a href="https://github.com/ofou/graham-essays" class="text-orange-500 hover:text-orange-700">graham-essays</a> repository.
+            </p>
+            <p class="text-center text-xs text-gray-400 mt-2">
+                ✨ Made with love for the wisdom of Paul Graham ✨
             </p>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script>
-        // Gallery infinite scroll functionality
+        // Gallery infinite scroll functionality and search functionality
         document.addEventListener('DOMContentLoaded', function() {
             // Get the theme toggle button
             const themeToggle = document.getElementById('theme-toggle');
@@ -254,6 +334,30 @@
                 // Adjust animation duration based on the number of items
                 const scrollDuration = itemCount * 5; // 5 seconds per item
                 galleryScroll.style.animationDuration = scrollDuration + 's';
+            }
+
+            // Global search functionality
+            var globalSearch = document.getElementById('global-search');
+            if (globalSearch) {
+                globalSearch.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        var query = this.value.trim();
+                        if (query) {
+                            window.location.href = 'essays.html?q=' + encodeURIComponent(query);
+                        }
+                    }
+                });
+
+                // Also handle the search button click
+                var searchButton = globalSearch.nextElementSibling.nextElementSibling;
+                if (searchButton) {
+                    searchButton.addEventListener('click', function() {
+                        var query = globalSearch.value.trim();
+                        if (query) {
+                            window.location.href = 'essays.html?q=' + encodeURIComponent(query);
+                        }
+                    });
+                }
             }
         });
     </script>
