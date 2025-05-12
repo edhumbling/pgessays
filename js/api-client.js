@@ -1,7 +1,7 @@
 // Secure API client for Paul Graham Essays website
 
 // API configuration
-const API_BASE_URL = '/api/metrics';
+const API_BASE_URL = 'api/metrics';
 
 // Session ID for anonymous users
 let sessionId = null;

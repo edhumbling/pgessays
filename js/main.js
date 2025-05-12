@@ -301,7 +301,7 @@ function displayFeaturedEssays(essays) {
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
-                        <a href="/essays/${displaySlug}.html" class="text-orange-600 hover:text-orange-800 font-medium text-sm">Read more →</a>
+                        <a href="essays/${displaySlug}.html" class="text-orange-600 hover:text-orange-800 font-medium text-sm">Read more →</a>
                     </div>
                 </div>
             </div>
@@ -358,7 +358,7 @@ function initSearch() {
             if (e.key === 'Enter') {
                 const query = searchInput.value.trim();
                 if (query) {
-                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                    window.location.href = `essays.html?q=${encodeURIComponent(query)}`;
                 }
             }
         });
@@ -371,7 +371,7 @@ function initSearch() {
             if (e.key === 'Enter') {
                 const query = globalSearch.value.trim();
                 if (query) {
-                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                    window.location.href = `essays.html?q=${encodeURIComponent(query)}`;
                 }
             }
         });
@@ -382,7 +382,7 @@ function initSearch() {
             searchButton.addEventListener('click', function() {
                 const query = globalSearch.value.trim();
                 if (query) {
-                    window.location.href = `/essays.html?q=${encodeURIComponent(query)}`;
+                    window.location.href = `essays.html?q=${encodeURIComponent(query)}`;
                 }
             });
         }
@@ -450,7 +450,7 @@ function performSearch(query) {
         allEssaysElement.innerHTML = `
             <div class="col-span-3 text-center py-8">
                 <p class="text-gray-500">No essays found matching "${query}".</p>
-                <a href="/essays.html" class="mt-4 inline-block text-orange-500 hover:text-orange-700">View all essays</a>
+                <a href="essays.html" class="mt-4 inline-block text-orange-500 hover:text-orange-700">View all essays</a>
             </div>
         `;
     }
@@ -524,7 +524,7 @@ function displayAllEssays(essays) {
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-sm text-gray-500">Read time: ~10 min</span>
-                        <a href="/essays/${displaySlug}.html" class="text-orange-500 hover:text-orange-700 font-medium text-sm">Read more →</a>
+                        <a href="essays/${displaySlug}.html" class="text-orange-500 hover:text-orange-700 font-medium text-sm">Read more →</a>
                     </div>
                 </div>
             </div>
@@ -548,12 +548,8 @@ function handleRouting() {
 
         // Only process internal links that aren't already absolute
         if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
-            // Convert relative links to absolute
-            if (href.startsWith('essays/')) {
-                link.setAttribute('href', '/' + href);
-            } else {
-                link.setAttribute('href', '/' + href);
-            }
+            // Keep links relative
+            // No need to modify links as they should remain relative
         }
     });
 
@@ -561,7 +557,7 @@ function handleRouting() {
     if (document.title.includes('Page Not Found')) {
         console.log('404 page detected, redirecting to home page...');
         setTimeout(() => {
-            window.location.href = '/';
+            window.location.href = 'index.html';
         }, 3000);
     }
 }

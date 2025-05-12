@@ -3,7 +3,7 @@
 // Load categories data
 async function loadCategoriesData() {
     try {
-        const response = await fetch('/essays/categories.json');
+        const response = await fetch('essays/categories.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -22,7 +22,7 @@ function getEssayCategories(essayNumber, categoriesData) {
     if (!categoriesData || !categoriesData.essayTags || !essayNumber) {
         return [];
     }
-    
+
     return categoriesData.essayTags[essayNumber] || [];
 }
 
@@ -31,7 +31,7 @@ function getCategoryName(categoryId, categoriesData) {
     if (!categoriesData || !categoriesData.categories) {
         return categoryId;
     }
-    
+
     const category = categoriesData.categories.find(cat => cat.id === categoryId);
     return category ? category.name : categoryId;
 }
@@ -41,17 +41,17 @@ function generateCategoryTags(essayNumber, categoriesData) {
     if (!categoriesData || !essayNumber) {
         return '';
     }
-    
+
     const categoryIds = getEssayCategories(essayNumber, categoriesData);
     if (!categoryIds || categoryIds.length === 0) {
         return '';
     }
-    
+
     return categoryIds.map(categoryId => {
         const categoryName = getCategoryName(categoryId, categoriesData);
         const isPrimary = categoryId === categoryIds[0];
         const tagClass = isPrimary ? 'category-primary' : 'category-secondary';
-        
+
         return `<span class="tag ${tagClass}" data-category="${categoryId}">${categoryName}</span>`;
     }).join('');
 }
@@ -60,42 +60,42 @@ function generateCategoryTags(essayNumber, categoriesData) {
 async function preloadExcerpts() {
     try {
         // Get the latest essays
-        const response = await fetch('/essays/categories.json');
+        const response = await fetch('essays/categories.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const categoriesData = await response.json();
         const featuredEssays = categoriesData.categories.find(cat => cat.id === 'featured');
         const latestEssays = categoriesData.categories.find(cat => cat.id === 'latest');
-        
+
         if (!featuredEssays || !latestEssays) {
             return;
         }
-        
+
         // Combine featured and latest essays, remove duplicates
         const essaysToPreload = [...new Set([...featuredEssays.essays, ...latestEssays.essays])];
-        
+
         // Preload excerpts for these essays
         const excerpts = {};
-        
+
         await Promise.all(essaysToPreload.map(async (essayNumber) => {
             try {
-                const response = await fetch(`/essays/${essayNumber}.md`);
+                const response = await fetch(`essays/${essayNumber}.md`);
                 if (!response.ok) {
                     return;
                 }
-                
+
                 const markdown = await response.text();
                 excerpts[essayNumber] = extractExcerpt(markdown, 150);
             } catch (error) {
                 console.error(`Error preloading excerpt for essay ${essayNumber}:`, error);
             }
         }));
-        
+
         // Store excerpts in window object for quick access
         window.preloadedExcerpts = excerpts;
-        
+
     } catch (error) {
         console.error('Error preloading excerpts:', error);
     }
@@ -111,10 +111,10 @@ async function getExcerpt(essayNumber, index, containerSelector) {
         }
         return;
     }
-    
+
     // Otherwise load it
     try {
-        const response = await fetch(`/essays/${essayNumber}.md`);
+        const response = await fetch(`essays/${essayNumber}.md`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -137,11 +137,11 @@ function filterEssaysByCategory(essays, categoryId, categoriesData) {
     if (categoryId === 'all') {
         return essays;
     }
-    
+
     if (!categoriesData || !categoriesData.essayTags) {
         return essays;
     }
-    
+
     return essays.filter(essay => {
         const essayNumber = essay['Article no.'];
         const categories = getEssayCategories(essayNumber, categoriesData);
@@ -153,7 +153,7 @@ function filterEssaysByCategory(essays, categoryId, categoriesData) {
 document.addEventListener('DOMContentLoaded', function() {
     // Preload excerpts for faster loading
     preloadExcerpts();
-    
+
     // Load categories data
     loadCategoriesData();
 });
